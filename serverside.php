@@ -13,7 +13,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>	
 <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -35,8 +34,10 @@
  <?php
 
 include("connect.php");
+	
 
 	//COMPANY
+	//$apply_position = mysqli_real_escape_string($conn,$_POST['apply_position']);
 	$position= mysqli_real_escape_string($conn,$_POST['position_name']);
 	if($position=='Others'){
 		$position = mysqli_real_escape_string($conn,$_POST['other_position']."(Others)");
@@ -122,7 +123,7 @@ include("connect.php");
 			 $mother_name= $mother_name;
 		}
 
-	//work exp
+	
 	$one_datefrom = mysqli_real_escape_string($conn,$_POST['datefrom']);
 	$one_dateto = mysqli_real_escape_string($conn,$_POST['dateto']);
 	$ONE_DATES = $one_datefrom. " - " .$one_dateto;
@@ -151,22 +152,13 @@ include("connect.php");
 		else {
 			 	 $one_compadd = $one_compadd;
 		}
-	$ONE_EMPNAME = $one_company. ", ". $one_compadd;
+	$ONE_EMPNAME = $one_company. "$$". $one_contactnum. "%%". $one_compadd;
 			try { 
 				if (strlen($ONE_EMPNAME) < 8) {
 					 $ONE_EMPNAME = ""; 
 				} 
 				else { 
 					 $ONE_EMPNAME = $ONE_EMPNAME;} 
-				}
-			catch (Exception $e) { }
-	$ONE_EMPHONE = $one_contactnum;
-			try { 
-				if (empty($ONE_EMPHONE)) {
-					 $ONE_EMPHONE = " "; 
-				} 
-				else { 
-					 $ONE_EMPHONE = $ONE_EMPHONE;} 
 				}
 			catch (Exception $e) { }
 
@@ -239,7 +231,7 @@ include("connect.php");
 			if (!empty($_POST['compadd2'])) {
 				$two_compadd = mysqli_real_escape_string($conn,$_POST['compadd2']); 
 				} 
-	$TWO_EMPNAME = $two_company. ", ". $two_compadd;
+	$TWO_EMPNAME = $two_company. "$$". $two_contactnum. "%%". $two_compadd;
 			try {
 				 if (!empty($TWO_EMPNAME) && strlen($TWO_EMPNAME) <= 6) { 
 				 		$TWO_EMPNAME = ""; 
@@ -247,15 +239,6 @@ include("connect.php");
 				 else {
 				 		$TWO_EMPNAME = $TWO_EMPNAME;} 
 				 }
-			catch (Exception $e) { }
-	$TWO_EMPHONE = $two_contactnum;
-			try { 
-				if (empty($TWO_EMPHONE)) {
-					 $TWO_EMPHONE = " "; 
-				} 
-				else { 
-					 $TWO_EMPHONE = $TWO_EMPHONE;} 
-				}
 			catch (Exception $e) { }
 
 	$TWO_POSITION = "";
@@ -302,7 +285,7 @@ include("connect.php");
 				$three_compadd = mysqli_real_escape_string($conn,$_POST['compadd3']); 
 			}
 
-	$THREE_EMPNAME = $three_company.", ". $three_compadd;
+	$THREE_EMPNAME = $three_company."$$".$three_contactnum."%%".$three_compadd;
 			try {
 				 if (!empty($THREE_EMPNAME) && strlen($THREE_EMPNAME) <= 6) { 
 				 		$THREE_EMPNAME = ""; 
@@ -310,15 +293,6 @@ include("connect.php");
 				 else {
 				 		$THREE_EMPNAME = $THREE_EMPNAME;} 
 				 }
-			catch (Exception $e) { }
-	$THREE_EMPHONE = $three_contactnum;
-			try { 
-				if (empty($THREE_EMPHONE)) {
-					 $THREE_EMPHONE = " "; 
-				} 
-				else { 
-					 $THREE_EMPHONE = $THREE_EMPHONE;} 
-				}
 			catch (Exception $e) { }
 	
 	$THREE_POSITION = "";
@@ -368,7 +342,7 @@ include("connect.php");
 			if (!empty($_POST['compadd4'])) { 
 				$four_compadd = mysqli_real_escape_string($conn,$_POST['compadd4']); 
 			}
-	$FOUR_EMPNAME = $four_company. ", ". $four_compadd;
+	$FOUR_EMPNAME = $four_company. "$$". $four_contactnum. "%%". $four_compadd;
 			try {
 				 if (strlen($FOUR_EMPNAME) <= 6) { 
 				 		$FOUR_EMPNAME = " "; 
@@ -377,15 +351,7 @@ include("connect.php");
 				 		$FOUR_EMPNAME = $FOUR_EMPNAME;} 
 				 }
 			catch (Exception $e) { }
-	$FOUR_EMPHONE = $four_contactnum;
-			try { 
-				if (empty($FOUR_EMPHONE)) {
-					 $FOUR_EMPHONE = " "; 
-				} 
-				else { 
-					 $FOUR_EMPHONE = $FOUR_EMPHONE;} 
-				}
-			catch (Exception $e) { }		
+			
 
 	$FOUR_POSITION = ""; 
 			if (!empty($_POST['position4'])) {
@@ -434,22 +400,13 @@ include("connect.php");
 			if (!empty($_POST['compadd5'])) { 
 				$five_compadd = mysqli_real_escape_string($conn,$_POST['compadd5']); 
 			}
-	$FIVE_EMPNAME = $five_company. ", ". $five_compadd;
+	$FIVE_EMPNAME = $five_company. "$$". $five_contactnum. "%%". $five_compadd;
 			if (strlen($FIVE_EMPNAME) <= 6) { 
 				$FIVE_EMPNAME = ""; 
 			} 
 			else {
 				$FIVE_EMPNAME = $FIVE_EMPNAME;
 			}
-	$FIVE_EMPHONE = $five_contactnum;
-			try { 
-				if (empty($FIVE_EMPHONE)) {
-					 $FIVE_EMPHONE = " "; 
-				} 
-				else { 
-					 $FIVE_EMPHONE = $FIVE_EMPHONE;} 
-				}
-			catch (Exception $e) { }
 
 	$FIVE_POSITION = ""; 
 			if (!empty($_POST['position5'])) {
@@ -517,20 +474,20 @@ include("connect.php");
 		$application_status='Unfinished';
 	}else{
 		$application_status='Pending';
-	}
+	
 	
 	 $sql= "INSERT INTO tbl_application (`POSITION` , `APPLICATION_SOURCE`, `SHIFTING_SCHEDULE` , `WEEKENDS_HOLIDAYS` , `EMPLOYMENT_DATE` , `NAME` , `LASTNAME`, `FIRSTNAME`, `MIDDLENAME`, `EXTENSIONNAME`, `NICKNAME` , `GENDER` , `CIVIL STATUS` , `CITIZENSHIP`, `EMAIL ADDRESS` ,  `FATHER'S NAME`, `F_LNAME` , `F_FNAME` , `F_MNAME` , `MOTHER'S MAIDEN NAME`, `M_LNAME` , `M_FNAME`, `M_MNAME` , `DATE OF BIRTH`,
 
-		 `1. Inclusive Dates`, `1.1 Employer's Name, Address and Phone`, `1.2 Position Title`, `1.3 Name_Position and Contact No. of Immediate Supervisor`, `1.4 Monthly Salary`, `1.5 Reason for Leaving`,  `1.6 Emp_phone`,
-		 `2. Inclusive Dates`, `2.1 Employer's Name, Address and Phone`, `2.2 Position Title`, `2.3 Name_Position and Contact No. of Immediate Supervisor`, `2.4 Monthly Salary`, `2.5 Reason for Leaving`,  `2.6 Emp_phone`, 
-		 `3. Inclusive Dates`, `3.1 Employer's Name, Address and Phone`, `3.2 Position Title`, `3.3 Name_Position and Contact No. of Immediate Supervisor`, `3.4 Monthly Salary`, `3.5 Reason for Leaving`,  `3.6 Emp_phone`, 
-		 `4. Inclusive Dates`, `4.1 Employer's Name, Address and Phone`, `4.2 Position Title`, `4.3 Name_Position and Contact No. of Immediate Supervisor`, `4.4 Monthly Salary`, `4.5 Reason for Leaving`,  `4.6 Emp_phone`, 
-		 `5. Inclusive Dates`, `5.1 Employer's Name, Address and Phone`, `5.2 Position Title`, `5.3 Name_Position and Contact No. of Immediate Supervisor`, `5.4 Monthly Salary`, `5.5 Reason for Leaving`,  `5.6 Emp_phone`, `CERTIFY`,
+		 `1. Inclusive Dates`, `1.1 Employer's Name, Address and Phone`, `1.2 Position Title`, `1.3 Name_Position and Contact No. of Immediate Supervisor`, `1.4 Monthly Salary`, `1.5 Reason for Leaving`, 
+		 `2. Inclusive Dates`, `2.1 Employer's Name, Address and Phone`, `2.2 Position Title`, `2.3 Name_Position and Contact No. of Immediate Supervisor`, `2.4 Monthly Salary`, `2.5 Reason for Leaving`, 
+		 `3. Inclusive Dates`, `3.1 Employer's Name, Address and Phone`, `3.2 Position Title`, `3.3 Name_Position and Contact No. of Immediate Supervisor`, `3.4 Monthly Salary`, `3.5 Reason for Leaving`, 
+		 `4. Inclusive Dates`, `4.1 Employer's Name, Address and Phone`, `4.2 Position Title`, `4.3 Name_Position and Contact No. of Immediate Supervisor`, `4.4 Monthly Salary`, `4.5 Reason for Leaving`, 
+		 `5. Inclusive Dates`, `5.1 Employer's Name, Address and Phone`, `5.2 Position Title`, `5.3 Name_Position and Contact No. of Immediate Supervisor`, `5.4 Monthly Salary`, `5.5 Reason for Leaving`, `CERTIFY`,
 		 `SALARY`, `HEIGHT`, `WEIGHT`, `BLOODTYPE`, `SKYPE_USERID`, `CONTACT NAME`, `CONTACT DETAILS`, `MOBILE_NUMBER`, `SPOUSE'S OCCUPATION`, `HOME_TELNUM`,`REFERENCE_NO`,`APPLICANT_STATUS`,`HAVE_CHILD`,`Status`,`source`) VALUES
 
-		 ('$position', '$application_source', '$sched' , '$holidays' , '$empdate' , '$name' , '$lname', '$fname', '$mname', '$ename', '$nickname', '$sex', '$cstatus', '$citizenship', '$EMAIL', '$father_name' ,'$flname', '$ffname', '$fmidname' , '$mother_name', '$mlname' , '$mfname' , '$mmname' , '$bday123','$ONE_DATES', '$ONE_EMPNAME', '$ONE_POSITION', '$ONE_SUPERVISOR', '$ONE_SALARY', '$ONE_REASON', '$ONE_EMPHONE', '$TWO_DATES', '$TWO_EMPNAME', '$TWO_POSITION', '$TWO_SUPERVISOR', '$TWO_SALARY', '$TWO_REASON', '$TWO_EMPHONE', '$THREE_DATES', '$THREE_EMPNAME', '$THREE_POSITION', '$THREE_SUPERVISOR', '$THREE_SALARY', '$THREE_REASON', '$THREE_EMPHONE', '$FOUR_DATES', '$FOUR_EMPNAME', '$FOUR_POSITION', '$FOUR_SUPERVISOR', '$FOUR_SALARY', '$FOUR_REASON', '$FOUR_EMPHONE', '$FIVE_DATES', '$FIVE_EMPNAME', '$FIVE_POSITION', '$FIVE_SUPERVISOR', '$FIVE_SALARY', '$FIVE_REASON ', '$FIVE_EMPHONE', '$CERTIFY', '$salary_expectation', '$height', '$WEIGHT', '$BLOODTYPE','$SKYPE_USERID', '$CONTACT_NAME', '$CONTACT_DETAILS', '$mobile_num', '$Spouse_occupation', '$home_telnum','$rand_str','$app_stat','$c_s_result','$application_status','application')";
+		 ('$position', '$application_source', '$sched' , '$holidays' , '$empdate' , '$name' , '$lname', '$fname', '$mname', '$ename', '$nickname', '$sex', '$cstatus', '$citizenship', '$EMAIL', '$father_name' ,'$flname', '$ffname', '$fmidname' , '$mother_name', '$mlname' , '$mfname' , '$mmname' , '$bday123','$ONE_DATES', '$ONE_EMPNAME', '$ONE_POSITION', '$ONE_SUPERVISOR', '$ONE_SALARY', '$ONE_REASON', '$TWO_DATES', '$TWO_EMPNAME', '$TWO_POSITION', '$TWO_SUPERVISOR', '$TWO_SALARY', '$TWO_REASON', '$THREE_DATES', '$THREE_EMPNAME', '$THREE_POSITION', '$THREE_SUPERVISOR', '$THREE_SALARY', '$THREE_REASON', '$FOUR_DATES', '$FOUR_EMPNAME', '$FOUR_POSITION', '$FOUR_SUPERVISOR', '$FOUR_SALARY', '$FOUR_REASON', '$FIVE_DATES', '$FIVE_EMPNAME', '$FIVE_POSITION', '$FIVE_SUPERVISOR', '$FIVE_SALARY', '$FIVE_REASON ', '$CERTIFY', '$salary_expectation', '$height', '$WEIGHT', '$BLOODTYPE','$SKYPE_USERID', '$CONTACT_NAME', '$CONTACT_DETAILS', '$mobile_num', '$Spouse_occupation', '$home_telnum','$rand_str','$app_stat','$c_s_result','$application_status','application')";
 
-
+}
 
 	if ($conn->query($sql) === TRUE) {
 		echo "";

@@ -1,9 +1,9 @@
 <?php
 
 	$servername = "localhost";
-	$username = "hr_online_app_db";
-	$password = "hr_online_app_db";
-	$database = "hr_online_app_db4";
+	$username = "root";
+	$password = "";
+	$database = "db_hr_online_aug13";
 
 
 

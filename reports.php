@@ -49,7 +49,71 @@
 			background-color: #03a9f4;
 			}
 		</style>
-<?php include('sidenavhtml.php');?>
+<?php 
+
+	$id = $_GET['id'];
+		echo '
+	<style>
+		h5 {
+			color:black;
+
+		}
+		h5:hover {
+			color:white;
+			
+		}
+		.navi:hover{
+			background-color: #00008B;
+			color: white;
+		}
+	</style>
+	
+	<div id="mySidenav" class="sidenav" style="background: url(pic4.jpg);">
+	
+	<img src="adg1.png" class="img-responsive" width="60%" style="margin-bottom: 10%; margin-left: 4em;">
+	<img src="adg.png" class="img-responsive"  width="100%" style=" padding: 5px; margin-top: 5px; margin-bottom: 20%;">
+	<a href="javascript:void(0)" class="closebtn" style="color:black;" onclick="closeNav()">&times;</a> ';
+	
+	/*
+	if($_SESSION['neco'] == 1)
+		  echo'
+			<a href="google.php" style="background-color: #262626"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION['neco'] == 2){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left; background-color: #262626; href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION["neco"] == 3){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	*/
+	echo' 
+	
+	<a class="navi" href="google.php?id='.$id.'"><h5>Application List</h5></a>
+	<a class="navi" style="text-align: left;" href="reports.php?id='.$id.'"><h5>Reports</h5></a>
+	<a class="navi" style="text-align: left;" href="addNewPosition.php?id='.$id.'"><h5>Add Position</h5></a>
+	<a class="navi" style="text-align: left;" href="createAccount.php?id='.$id.'"><h5>Create User Accounts</h5></a>
+	<a class="navi" style="text-align: left;" href="user_logs.php?id='.$id.'"><h5>User History Logs</h5></a>';
+   if($_SESSION['id'] == 1){
+	  echo '
+	  <a class="navi" href="about.php?id='.$id.'" style="font-size: 1em; margin-bottom:1em;"> About Us</a>
+	 
+	  <a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+		
+	  </div>';
+   }else{
+	   //if($_SESSION['neco'] == 3){
+		   echo '<a class="navi" id = "accountAnchor" style="text-align: left;" href="account.php?id='.$id.'"><h5>Account</h5></a>
+		   <a class="navi" href="about.php"><h5> About Us </h5></a>
+				<a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+				 </div> ';
+	//}
+	
+}?>
 
 		<script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
 
@@ -60,7 +124,7 @@
 
 
 		<div id="main" >
-			<div class="row"style = "position:fixed; z-index:1; width:100%; margin-top:-20px; background-color:#dfe5ec;" id = 'topDiv'>
+			<div class="row" style ="position:fixed; z-index:1; width:100%; margin-top:-20px; background-color:#dfe5ec;" id = 'topDiv'>
 				<nav  class="navbar navbar-inverse" >
 				  <div class="container-fluid" id= 'navHead' style = 'background-color:#dfe5ec;'>
 						<a class="navbar-brand" style="cursor:pointer; z-index:1;" href="#"><h4 style="font-family:'Trebuchet MS', Helvetica, sans-serif; cursor:pointer; z-index:1; color:#00008B;" onclick="openNav()"><i class="fa fa-bars"></i> Menu</h4></a>		  
@@ -91,7 +155,7 @@
                                               
                                         </div>
 												<div class="panel-body">
-													<canvas id="myChart7" height="90" class = "Annual Report"></canvas>
+									<canvas id="myChart7" height="90" class = "Annual Report"></canvas>
 												</div>
 											</div>
 											<hr>
@@ -109,7 +173,7 @@
 						<legend class="text-center" style ='margin-bottom:1%;'><i href="#adjustDate" data-parent="#accordion" data-toggle="collapse" class="fa fa-angle-down pull-right collapsed" aria-expanded = 'false' aria-controls='adjustDate'> </i></legend>
 					<h1> </h1>
 					</div>
-					<div id ='adjustDate' class="collapse" style = 'background-color: #dfe5ec; padding-top:1.5%;'>
+			<div id ='adjustDate' class="collapse" style = 'background-color: #dfe5ec; padding-top:1.5%;'>
 						<div class= 'row' > 
 							<div class="bootstrap-iso" >
 							   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -118,13 +182,13 @@
 										  <label for="date"  style ='color:black;'>
 												Start Date
 										  </label>
-										  <div class="input-group">
+										  <div class="input-group" >
 											<div class="input-group-addon">
 												 <i class="fa fa-calendar">
 												 </i>
 											</div>
-											<input class="form-control" id="dateStart" name="date"  type="text"/>
-										   </div>
+				     <input class="form-control" id="dateStart" name="date" type="text">
+										</div>
 									  </div>
 								 </div>
 							   </div> 
@@ -140,7 +204,7 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input class="form-control" id="dateEnd" name="date" type="text"/>
+									<input class="form-control" id="dateEnd" name="date" type="text">
 											</div>
 										</div>
 									</div>
@@ -176,33 +240,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- List Modal -->
-
-	<div id="listmodal" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class='modal-header' style='background-color: #00008B'>
-	        <button type='button' class='close' data-dismiss='modal'>&times;</button>
-	        <h4 class='modal-title' style='color:white'>Applicant List</h4>
-	      </div>
-	      <div class="modal-body">
-	      <?php
-	      $sql2= "SELECT NAME as 'name' FROM tbl_application WHERE POSITION = 'Intern' AND timestamp BETWEEN '$startDate' AND '$endDate'";
-	      $result = $conn->query($sql2);
-	      if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()){
-			echo "<ul class='list-group'><li class='list-group-item'>".$row['name']."</li></ul>";
-			}
-			}
-			?>
-	      <div class='modal-footer'>
-	        <button class='btn btn-sm btn-raised btn-default' data-dismiss='modal'>Close</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	  </div>
-	</div>
 					<h1></h1>
 					 
 						<div class="row" style = 'margin-left:10%;'>
@@ -221,10 +258,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-5" style = 'margin-right:10%; float:right;'>
+
+							<div class="col-md-5" id='ab' style = 'margin-right:10%; float:right;'>
 								<div class="panel panel-info">
 									<div class="panel-heading " style = 'background-color:#dab358'>
-										<h3 class="text-center" style="font-family:'Trebuchet MS', Helvetica, sans-serif;color:white;">Gender</h3>
+										<h3 class="text-center" id='a' style="font-family:'Trebuchet MS', Helvetica, sans-serif;color:white;">Gender</h3>
 										<legend class="text-center"><i data-toggle="collapse" data-parent="#accordion" href="#chart2" ></i></legend>
 									</div>
 									<div id="chart2" class="panel-collapse collapse in">
@@ -236,6 +274,7 @@
 									</div>
 								</div>
 							</div>
+							
 						</div>
 						</div>
 						</div>
@@ -245,11 +284,50 @@
 					<div class = "row">
 					<div class="col-lg-12">
 					<div class="panel-heading " style = 'background-color:#97b6ca;color:black;'>
-					<h4><b>Application Source and Status Graph</b><legend class="text-center" style ='margin-bottom:1%;'><i href="#fixInfo" data-parent="#accordion" data-toggle="collapse" class="fa fa-angle-down pull-right collapsed" aria-expanded = 'false' aria-controls='fixInfo'></i></legend></h4>
-
-					</div>
-					<div id ='fixInfo' class="collapse" style = 'background-color: #dfe5ec; padding-top:2%;'>	
+					<h4><b>Application Source and Status Graph</b>
+					<legend class="text-center" style ='margin-bottom:1%;'><i href="#fixInfo" data-parent="#accordion" data-toggle="collapse" class="fa fa-angle-down pull-right collapsed" aria-expanded = 'false' aria-controls='fixInfo'></i></legend></h4></div>
+                 <div id ='fixInfo' class="collapse" style = 'background-color: #dfe5ec; padding-top:2%;'>	
 						<h1></h1>
+					<div class= 'row' > 
+							<div class="bootstrap-iso" >
+							   <div class="col-md-6 col-sm-6 col-xs-12">
+								 <div class="form-group ">
+									  <div class="col-sm-10" style = "margin-bottom:2%;">
+										  <label for="date1"  style ='color:black;'>
+												Start Date
+										  </label>
+										  <div class="input-group" >
+											<div class="input-group-addon">
+												 <i class="fa fa-calendar">
+												 </i>
+											</div>
+										<input class="form-control" id="dateStart1" name="date1" type="text">
+										   </div>
+									  </div>
+								 </div>
+							   </div> 
+							</div>
+							<div class="bootstrap-iso" >
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group ">
+										<div class="col-sm-10" style = "margin-bottom:2%; float:right;" >
+											<label for="date1" style ='color:black;'>
+												End Date
+											</label>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+										<input class="form-control" id="dateEnd1" name="date1" type="text">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					
 						<div class="row">
 							<div class="col-md-6">
 								<div class="panel panel-info">
@@ -259,7 +337,7 @@
 									<div id="chart1" class="panel-collapse collapse in">
                                         <div class="container"></div>   
 										<div class="panel-body">
-											<canvas id="myChart" height="180px"></canvas>
+											<canvas id="myPieChart" height="180px"></canvas>
 											<hr>
 										</div>
 									</div>
@@ -281,22 +359,12 @@
 							</div>
 						</div>
 						<h1></h1>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="panel panel-info">
-									<div class="panel-heading " style = 'background-color:#dab358'>
-									<h3 class="text-center" style="font-family:'Trebuchet MS', Helvetica, sans-serif;color:white;">Activity</h3>
-									</div>
-									<div id="chart1" class="panel-collapse collapse in">
-                                        <div class="container"></div>
-										<div class="panel-body">
-											<canvas id="myChart6" height="180px"></canvas>
-											<hr>
-										</div>
-									</div>
-								</div>
-							</div>
-													<div class="col-md-6">
+
+
+						
+                         
+						<div class = 'row' >
+							<div class="col-lg-10" style = 'width:70%; margin-left:16%'>
 								<div class="panel panel-info">
 									<div class="panel-heading " style = 'background-color:#dab358'>
 									<h3 class="text-center" style="font-family:'Trebuchet MS', Helvetica, sans-serif;color:white;">Applicant Source</h3>
@@ -312,7 +380,7 @@
 							</div>
 						</div>
 
-						</div>
+						
 					<h1></h1>
 					</div>
 					</div>
@@ -346,47 +414,54 @@
 		<script type="text/javascript" src="js/dataTables.buttons.min.js"></script>
 		<script type="text/javascript" src="js/dataTables.tableTools.min.js"></script>
 		<script src="js/Chart.js"></script>
+		 <script src="js/chartLable.js"></script>
+
 	<script type="text/javascript">
-		var total = [];
-		var genderJF = [];
-		var genderG = [];
+		var activeLog = 0;
 		var ageJobfair = [];
 		var ageGoogle = [];
+		var allSource = [];
+		var stats=[];
+		curDate = new Date();
+		var createdDateTo2 = "";
+		var createdDateTo = "";
+		var currentDate = 0;
+		var genderJF = [];
+		var genderG = [];
+		var idleTime = 0;
+		var inactiveLog = 0;
 		var locationG = [];
 		var locationJF = [];
 		var locationI = [];
+		var monthly = [];
+		var myTable;
 		var statusNew = 0;
 		var statusSched = 0;
 		var statusAccepted = 0;
 		var statusComment = 0;
-		var activeLog = 0;
-		var inactiveLog = 0;
-		var currentDate = 0;
-		var monthly = [];
-		var allSource = [];
-		var idleTime = 0;
-		curDate = new Date();
+		var total = [];
 		var time = new Date();
-		var createdDateTo2 = "";
-		var createdDateTo = "";
-		var myTable;
 		var startDate = "<?php echo $startDate;?>";
 		var endDate = "<?php echo $endDate;?>";
+		var currentYear="<?php echo $currentYear;?>";
 		$(document).ready(function () {
 			 myTable = $('#tblTitleJob').DataTable({
 				"bLengthChange": false,
 				"order": [[ 1, "desc" ]],
 				"dom": 'Bfrtip',
-				"columnDefs": [
+				"columnDefs": 
+				[
 					{ "width": "50%", "targets": 0 }
-				],        buttons: [
+				              ], 
+
+				          buttons: [
             				{ 'extend': 'print',
 							text: 'Print',
 								customize: function ( win ) {
-									$(win.document.body)
-									.css( 'font-size', '10pt' ).css( 'text-align', 'center' );
+								$(win.document.body)
+								.css( 'font-size', '10pt' ).css( 'text-align', 'center' );
 								$(win.document.body).find( 'table' )
-									.css( 'font-size', '8pt' ).css('position','absolute').css('left','30%').css('margin-top','10%');
+								.css( 'font-size', '8pt' ).css('position','absolute').css('left','30%').css('margin-top','10%');
 								var canvas = document.getElementById("myChart3");
 								var dataUrl = canvas.toDataURL();
 								var canvas2 = document.getElementById("myChart2");
@@ -405,16 +480,28 @@
 			var idleInterval = setInterval(timerIncrement, 60000); // Check every 60 Seconds
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			var date_input=$('input[name="date"]'); //our date input has the name "date"
+			//our date input has the name "date"
+			var date_input1=$('input[name="date1"]'); 
+			var container1=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input1.datepicker({
+				format: 'yyyy-mm-dd',
+				container: container1,
+				autoclose: true,
+
+			});
+            var date_input=$('input[name="date"]'); 
 			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 			date_input.datepicker({
 				format: 'yyyy-mm-dd',
 				container: container,
 				autoclose: true,
+
 			});
 			
 			$('#dateStart').datepicker('setDate',startDate);
+			$('#dateStart1').datepicker('setDate',startDate);
 			$('#dateEnd').datepicker('setDate',endDate);
+			$('#dateEnd1').datepicker('setDate',endDate);
 			
 			$('#dateStart').change(function(){
 				if(new Date($(this).datepicker('getDate')) >= new Date($('#dateEnd').datepicker('getDate')))
@@ -428,7 +515,7 @@
 			});
 			
 			$('#dateEnd').change(function(){
-				if(new Date($(this).datepicker('getDate')) <= new Date($('#dateStart').datepicker('getDate')))
+			if(new Date($(this).datepicker('getDate')) <= new Date($('#dateStart').datepicker('getDate')))
 					{
 						$(this).datepicker('setDate',endDate);
 					}
@@ -437,7 +524,31 @@
 					dateChange();
 				}	
 			});
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			$('#dateStart1').change(function(){
+				if(new Date($(this).datepicker('getDate')) >= new Date($('#dateEnd1').datepicker('getDate')))
+					{
+						$(this).datepicker('setDate',startDate);
+					}
+				else{
+					startDate = $(this).val();
+					dateChange1();
+					}
+			});
+			
+			$('#dateEnd1').change(function(){
+				if(new Date($(this).datepicker('getDate')) <= new Date($('#dateStart1').datepicker('getDate')))
+					{
+						$(this).datepicker('setDate',endDate);
+					}
+				else{
+					endDate = $(this).val();
+					dateChange1();
+				}	
+			});
+
+
+			
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			$(this).mousemove(function (e) {
 				idleTime = 0;
@@ -486,7 +597,7 @@
 			});
 		}
 		function changeYear(process){
-					$.ajax({
+				$.ajax({
 				url: "query.php",
 				type: "POST",
 				data: {currentYear: process},
@@ -564,11 +675,15 @@
 
 			
 			
-			
-							var data =  {
-									labels: ["Application", "Jobfair", "Indeed"],//
-									datasets: [{
-										label: '# of Applications',
+			         var ctx=$('#myPieChart');
+
+					// Create a pie chart
+					var myPieChart = new Chart(ctx, {
+						type: "doughnut",
+						data: {
+							labels: ["Application", "Jobfair", "Indeed"],
+							datasets: [{
+										
 										data: total,
 										backgroundColor: [
 											'rgba(54, 162, 235, 1)',
@@ -576,63 +691,67 @@
 											'rgba(255, 206, 86, 1)'
 										],
 										borderColor: [
-											'rgba(54, 162, 235, 1)',
-											'rgba(255,99,132,1)',
-											'rgba(255, 206, 86, 1)'
+											'rgba(0, 0, 0, 0)',
+											'rgba(0,0,0,0)',
+											'rgba(0, 0, 0, 0)'
 										],
 										borderWidth: 2
 									}]
-								};
-
-					var canvas = document.getElementById("myChart");
-					var ctx = canvas.getContext("2d");
-					var midX = canvas.width/2;
-					var midY = canvas.height/2
-					var totalValue = getTotalValue(data);
-
-					// Create a pie chart
-					var myPieChart = new Chart(ctx, {
-						type: "doughnut",
-						data: data,
+						},
 						showTooltips: false,
-						options:{
-						"onComplete": drawSegmentValues}
+						options:
+						{
+    pieceLabel: {
+      // render 'label', 'value', 'percentage' or custom function, default is 'percentage'
+      render: 'value',
+
+      // precision for percentage, default is 0
+      precision: 0,
+      
+      // identifies whether or not labels of value 0 are displayed, default is false
+      showZero: false,
+
+      // font size, default is defaultFontSize
+      fontSize: 20,
+
+      // font color, can be color array for each data, default is defaultFontColor
+      fontColor: '#0f0f0a',
+
+      // font style, default is defaultFontStyle
+      fontStyle: 'bold',
+
+      // font family, default is defaultFontFamily
+      fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+      // draw label in arc, default is false
+      arc: false,
+
+      // position to draw label, available value is 'default', 'border' and 'outside'
+      // default is 'default'
+      position: 'default',
+
+      // draw label even it's overlap, default is false
+      overlap: true
+    },
+          
+				
+					}
 					});
 
-					var radius = myPieChart.outerRadius;
+					
+					   $(function(){
+					      $('#dateStart1').change(function(){
 
-					function drawSegmentValues()
-					{
-						for(var i=0; i<myPieChart.segments.length; i++) 
-						{
-							ctx.fillStyle="white";
-							var textSize = canvas.width/10;
-							ctx.font= textSize+"px Verdana";
-							// Get needed variables
-							var value = Math.floor(myPieChart.segments[i].value/totalValue*100)+'%';
-							var startAngle = myPieChart.segments[i].startAngle;
-							var endAngle = myPieChart.segments[i].endAngle;
-							var middleAngle = startAngle + ((endAngle - startAngle)/2);
+							myPieChart.destroy();
+						  });
+						  $('#dateEnd1').change(function(){
 
-							// Compute text location
-							var posX = (radius/2) * Math.cos(middleAngle) + midX;
-							var posY = (radius/2) * Math.sin(middleAngle) + midY;
+							myPieChart.destroy();
+						   });
+					
 
-							// Text offside by middle
-							var w_offset = ctx.measureText(value).width/2;
-							var h_offset = textSize/4;
-
-							ctx.fillText(value, posX - w_offset, posY + h_offset);
-						}
-					}
-
-					function getTotalValue(arr) {
-						var total = 0;
-						for(var i=0; i<arr.length; i++){
-							total += arr[i].value;}
-						return total;
-					}
-	
+						   });
+							
 			
 			
 	
@@ -688,8 +807,9 @@
 			// });
 
 /*--START--*/
+
 		var ctx2 = document.getElementById("myChart2");
-		var	myChart2 = new Chart(ctx2, {
+		var myChart2 = new Chart(ctx2, {
 			type: 'horizontalBar',
 			data: {
 				labels: ["Male", "Female"],
@@ -735,6 +855,19 @@
 					}
 		});
 
+
+
+                         $(function(){
+							$('#dateStart').change(function(){
+							myChart2.destroy();
+						});
+
+							$('#dateEnd').change(function(){
+
+							myChart2.destroy();
+						});
+						});
+
 				
 // datechange function
 			function dateChange(){
@@ -776,19 +909,19 @@
 				}]
 					 });	
 					},
-					error: function(data){
+					error: function(dta){
 						alert(data);
 						}
 				});
-				
+
 				
 					$.ajax({
 					url: "queryDateChange.php",
 					type: "POST",
 					data: {dateStart: startDate, dateEnd: endDate,gender:1},
 					success: function(dta){
-					genderG = dta.split(',');
-					
+
+						genderG = dta.split(',');
 					var ctx2 = document.getElementById("myChart2");
 					var	myChart2 = new Chart(ctx2, {
 						type: 'horizontalBar',
@@ -805,7 +938,9 @@
 								}
 								
 							]
-						},options:{
+						},options:{	
+							legend:{display: false},
+						
 							// "animation": {
 										  // "duration": 1,
 										  // "onComplete": function() {
@@ -825,24 +960,57 @@
 										  // }
 										// }, 
 										scales: {
-											yAxes: [{
+											xAxes: [{
 												ticks: {
 													beginAtZero: true
 												}
 											}]
-										}
+										},"animation": {
+							  "duration": 1,
+							  "onComplete": function() {
+								var chartInstance = this.chart,
+								ctx = chartInstance.ctx;
+								ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+								ctx.textAlign = 'left';
+								ctx.textBaseline = 'center';
+								ctx.fillStyle = "black";
+								this.data.datasets.forEach(function(dataset, i) {
+								  var meta = chartInstance.controller.getDatasetMeta(i);
+								  meta.data.forEach(function(bar, index) {
+									var data = dataset.data[index];
+									ctx.fillText(data, bar._model.x, bar._model.y - 5);
+								  });
+								});
+							  }
+						}, 
 						}
 					});
+
+                         $(function(){
+						$('#dateStart').change(function(){
+
+							myChart2.destroy();
+						});
+						$('#dateEnd').change(function(){
+
+							myChart2.destroy();
+						});
+					
+
+						});
+					
 					},
-					error: function(data){
-						alert(data);
+					error: function(dta){
+						alert(dta);
 						}
 				});
+				
 				$.ajax({
 					url: "queryDateChange.php",
 					type: "POST",
 					data: {dateStart: startDate, dateEnd: endDate,age:1},
 					success: function(dta){
+						
 					ageGoogle = dta.split(',');
 							var ctx3 = $('#myChart3');
 							var myChart3 = new Chart(ctx3, {
@@ -860,6 +1028,8 @@
 									]
 								},
 								options: {
+									
+									legend:{																	display: false		},
 									scales: {
 										yAxes: [{
 											ticks: {
@@ -897,6 +1067,19 @@
 															}
 											}
 							});
+					      $(function(){
+					      $('#dateStart').change(function(){
+
+							myChart3.destroy();
+						  });
+						  $('#dateEnd').change(function(){
+
+							myChart3.destroy();
+						   });
+					
+
+						   });
+
 
 					},
 					error: function(data){
@@ -905,6 +1088,186 @@
 				});
 				
 			}
+			function dateChange1(){
+				 total=[];
+				 stats=[];
+
+				$.ajax({
+					url: "queryDateChange.php",
+					type: "POST",
+					data: {dateStart1: startDate, dateEnd1: endDate,application2:1},
+					success: function(dta){
+	
+					total = dta.split(',');
+					var ctx=$('#myPieChart');
+
+					// Create a pie chart
+					var myPieChart = new Chart(ctx, {
+						type: "doughnut",
+						data: {
+							labels: ["Application", "Jobfair", "Indeed"],
+							datasets: [{
+										
+										data: total,
+										backgroundColor: [
+											'rgba(54, 162, 235, 1)',
+											'rgba(255, 99, 132, 1)',
+											'rgba(255, 206, 86, 1)'
+										],
+										borderColor: [
+											'rgba(0, 0, 0, 0)',
+											'rgba(0,0,0,0)',
+											'rgba(0, 0, 0, 0)'
+										],
+										borderWidth: 2
+									}]
+						},
+						showTooltips: false,
+						options:
+						{
+    pieceLabel: {
+      // render 'label', 'value', 'percentage' or custom function, default is 'percentage'
+      render: 'value',
+
+      // precision for percentage, default is 0
+      precision: 0,
+      
+      // identifies whether or not labels of value 0 are displayed, default is false
+      showZero: false,
+
+      // font size, default is defaultFontSize
+      fontSize: 20,
+
+      // font color, can be color array for each data, default is defaultFontColor
+      fontColor: '#0f0f0a',
+
+      // font style, default is defaultFontStyle
+      fontStyle: 'bold',
+
+      // font family, default is defaultFontFamily
+      fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+      // draw label in arc, default is false
+      arc: false,
+
+      // position to draw label, available value is 'default', 'border' and 'outside'
+      // default is 'default'
+      position: 'default',
+
+      // draw label even it's overlap, default is false
+      overlap: true
+    },
+           
+				
+					}
+					});
+
+					
+					   $(function(){
+					      $('#dateStart1').change(function(){
+
+							myPieChart.destroy();
+						  });
+						  $('#dateEnd1').change(function(){
+
+							myPieChart.destroy();
+						   });
+					
+
+						   });
+							
+
+
+					},
+					error: function(data){
+						alert(data);
+						}
+				});
+                 ///////////Last Edited////////
+
+					$.ajax({
+					url: "queryDateChange.php",
+					type: "POST",
+					data: {dateStart1: startDate, dateEnd1: endDate, stat:1,current:currentYear },
+					success: function(dta){
+
+					stats=dta.split(",");
+
+
+					var ctx4 = $('#myChart4');
+		            var myChart4 = new Chart(ctx4, {
+			         type: 'doughnut',
+			        data: {
+				    labels: ['Pending', 'No Show', 'Interview', 'Fail/Reject'],
+				    datasets:[
+					{
+						data: stats,
+						backgroundColor: ['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgb(51, 204, 51)',],
+						borderColor: ['rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)'],
+						borderWidth: 1
+					}
+				]
+			},
+			options:
+						{
+    pieceLabel: {
+      // render 'label', 'value', 'percentage' or custom function, default is 'percentage'
+      render: 'value',
+
+      // precision for percentage, default is 0
+      precision: 0,
+      
+      // identifies whether or not labels of value 0 are displayed, default is false
+      showZero: false,
+
+      // font size, default is defaultFontSize
+      fontSize: 20,
+
+      // font color, can be color array for each data, default is defaultFontColor
+      fontColor: '#0f0f0a',
+
+      // font style, default is defaultFontStyle
+      fontStyle: 'bold',
+
+      // font family, default is defaultFontFamily
+      fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+      // draw label in arc, default is false
+      arc: false,
+
+      // position to draw label, available value is 'default', 'border' and 'outside'
+      // default is 'default'
+      position: 'default',
+
+      // draw label even it's overlap, default is false
+      overlap: true
+    },
+            		
+		}
+
+		});
+		         $(function(){
+						$('#dateStart1').change(function(){
+
+							myChart4.destroy();
+						});
+						$('#dateEnd1').change(function(){
+
+							myChart4.destroy();
+						});
+					});
+
+
+					},
+					error: function(dta){
+						alert(dta);
+						}
+				});
+
+
+
+			}
+			
 //end of dateChange function
 
 		var ctx3 = $('#myChart3');
@@ -963,11 +1326,24 @@
 										}
 			},
 		});
+		     $(function(){
+						$('#dateStart').change(function(){
+
+							myChart3.destroy();
+						});
+						$('#dateEnd').change(function(){
+
+							myChart3.destroy();
+						});
+					
+
+						});
+
 		var ctx9 = $('#myChart9');
 		var myChart9 = new Chart(ctx9, {
 			type: 'bar',
 			data: {
-				labels: ['Jobstreet', 'Linked In', 'Facebook', 'Referral','Website','Others'],
+				labels: ['Jobstreet', 'Linked In', 'Facebook', 'From a Friend','Website','Others'],
 				datasets: [
 					{
 						data: allSource,
@@ -975,6 +1351,7 @@
 						backgroundColor: 'rgba(54, 162, 235, 2)',
 						borderColor: 'rgba(54, 162, 235, 1)',
 						borderWidth: 1
+
 					}
 				]
 			},
@@ -1017,6 +1394,7 @@
 			},
 		});
 
+            
 		
 		
 		
@@ -1029,13 +1407,60 @@
 				datasets:[
 					{
 						data: [statusNew, statusSched, statusAccepted, statusComment],
-						backgroundColor: ['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)',],
-						borderColor: ['rgba(255,99,132,1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)'],
+						backgroundColor: ['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgb(51, 204, 51)',],
+						borderColor: ['rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)'],
 						borderWidth: 1
 					}
 				]
-			}
+			},
+			options:
+						{
+    pieceLabel: {
+      // render 'label', 'value', 'percentage' or custom function, default is 'percentage'
+      render: 'value',
+
+      // precision for percentage, default is 0
+      precision: 0,
+      
+      // identifies whether or not labels of value 0 are displayed, default is false
+      showZero: false,
+
+      // font size, default is defaultFontSize
+      fontSize: 20,
+
+      // font color, can be color array for each data, default is defaultFontColor
+      fontColor: '#0f0f0a',
+
+      // font style, default is defaultFontStyle
+      fontStyle: 'bold',
+
+      // font family, default is defaultFontFamily
+      fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+      // draw label in arc, default is false
+      arc: false,
+
+      // position to draw label, available value is 'default', 'border' and 'outside'
+      // default is 'default'
+      position: 'default',
+
+      // draw label even it's overlap, default is false
+      overlap: true
+    },
+            		
+		}
+
 		});
+		         $(function(){
+						$('#dateStart1').change(function(){
+
+							myChart4.destroy();
+						});
+						$('#dateEnd1').change(function(){
+
+							myChart4.destroy();
+						});
+					});
 
 
 		var ctx7 = $('#myChart7');
@@ -1110,28 +1535,7 @@
 		
 		
 
-		var ctx = document.getElementById("myChart6");
-		var myChart6 = new Chart(ctx, {
-			type: 'doughnut',
-			data: {
-				labels: ["Active", "Inactive"],//
-				datasets: [{
-					label: 'Number of Applications',
-					data: [activeLog,inactiveLog],
-					backgroundColor: [
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 99, 132, 1)',
-						'rgba(255, 206, 86, 1)'
-					],
-					borderColor: [
-						'rgba(54, 162, 235, 1)',
-						'rgba(255,99,132,1)',
-						'rgba(255, 206, 86, 1)'
-					],
-					borderWidth: 2
-				}],
-			}
-		});
+	
 		
 		$("#myChart").click(function(e){
 			var activeBars = myChart.getElementAtEvent(e);
@@ -1201,7 +1605,7 @@
 			});
 		});	
 		$("#myChart9").click(function(e){
-			var activeBars = myChart9.getElementAtEvent(e);
+			var activeBars = A.getElementAtEvent(e);
 			var imfrom;
 			var index = activeBars[0]['_chart'].config.data;
 			var idx = activeBars[0]['_index'];
@@ -1257,24 +1661,7 @@
 			});
 		});
 		
-		$("#myChart6").click(function(e){
-			var activeBars = myChart6.getElementAtEvent(e);
-			var imfrom;
-			var index = activeBars[0]['_chart'].config.data;
-			var idx = activeBars[0]['_index'];
-			imfrom = index.labels[idx];
-			$.ajax({
-				url: "query.php",
-				type: "POST",
-				data: {activity:imfrom, reports: 1},
-				success: function(data){
-						window.open('google.php');
-				},
-				error: function(data){
-					alert(data);
-				}
-			});
-		});
+		
 		$("#myChart7").click(function(e){
 			var activeBars = myChart7.getElementAtEvent(e);
 			var imfrom;
@@ -1319,9 +1706,8 @@
 			var dataUrl1 = canvas1.toDataURL();			
 			var canvas2 = document.getElementById("myChart4");
 			var dataUrl2 = canvas2.toDataURL();		
-			var canvas3 = document.getElementById("myChart6");
-			var dataUrl3 = canvas3.toDataURL();
-			var canvas4 = document.getElementById("myChart9");
+		
+			var canvas4 = document.getElementById("A");
 			var dataUrl4 = canvas4.toDataURL();
 			var windowContent = '<!DOCTYPE html>';
 			windowContent += '<html>'

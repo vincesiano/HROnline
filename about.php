@@ -9,7 +9,6 @@
 	<title>Application List</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="shortcut icon" href="favicon.ico" />
     
     
 	<!-- <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css"> -->
@@ -80,7 +79,71 @@ background: none;
 }
 </style>
 	<?php  
-		include('sidenavhtml.php');
+		
+
+	$id = $_GET['id'];
+		echo '
+	<style>
+		h5 {
+			color:black;
+
+		}
+		h5:hover {
+			color:white;
+			
+		}
+		.navi:hover{
+			background-color: #00008B;
+			color: white;
+		}
+	</style>
+	
+	<div id="mySidenav" class="sidenav" style="background: url(pic4.jpg);">
+	
+	<img src="adg1.png" class="img-responsive" width="60%" style="margin-bottom: 10%; margin-left: 4em;">
+	<img src="adg.png" class="img-responsive"  width="100%" style=" padding: 5px; margin-top: 5px; margin-bottom: 20%;">
+	<a href="javascript:void(0)" class="closebtn" style="color:black;" onclick="closeNav()">&times;</a> ';
+	
+	/*
+	if($_SESSION['neco'] == 1)
+		  echo'
+			<a href="google.php" style="background-color: #262626"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION['neco'] == 2){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left; background-color: #262626; href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION["neco"] == 3){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	*/
+	echo' 
+	
+	<a class="navi" href="google.php?id='.$id.'"><h5>Application List</h5></a>
+	<a class="navi" style="text-align: left;" href="reports.php?id='.$id.'"><h5>Reports</h5></a>
+	<a class="navi" style="text-align: left;" href="addNewPosition.php?id='.$id.'"><h5>Add Position</h5></a>
+	<a class="navi" style="text-align: left;" href="createAccount.php?id='.$id.'"><h5>Create User Accounts</h5></a>
+	<a class="navi" style="text-align: left;" href="user_logs.php?id='.$id.'"><h5>User History Logs</h5></a>';
+   if($_SESSION['id'] == 1){
+	  echo '
+	  <a class="navi" href="about.php?id='.$id.'" style="font-size: 1em; margin-bottom:1em;"> About Us</a>
+	 
+	  <a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+		
+	  </div>';
+   }else{
+	   //if($_SESSION['neco'] == 3){
+		   echo '<a class="navi" id = "accountAnchor" style="text-align: left;" href="account.php?id='.$id.'"><h5>Account</h5></a>
+		   <a class="navi" href="about.php"><h5> About Us </h5></a>
+				<a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+				 </div> ';
+	//}
+	
+}
 	?>
 	<div id="main" >
         <nav style="width:103.25%; margin-top:-2%; margin-left:-2%; background-color:transparent">
@@ -97,7 +160,7 @@ background: none;
 						<div class="modal-body" style="text-align: justify;text-justify: inter-word;font-size:14px;">
                             <!--Anderson Recruitment Management System (ARMS)-->
                             
-				<p>&nbsp &nbsp &nbsp Anderson Recruits is an online recruitment system which can be accessed by corporate recruiters via web browsers anytime.The system offers sophisticated features such as real-time online application form, candidate search etc. What's more, a powerful filtering technology is incorporated to let HR professionals screen out unqualified candidates and reduce their workload. With the Candidate Alert technology and customizable searching criteria, the system will automatically search on the database for the newly registered job seekers and alert the users to ensure that they don't miss out on any talents. The Human Resources department implemented this system in order to automate many of the tasks of the application process.</p>
+				<p>&nbsp &nbsp &nbsp Anderson Recruits is an online recruitment system which can be accessed by corporate recruiters via web browsers anytime.The system offers sophisticated features such as real-time online application form, candidate search etc. What's more, a powerful filtering technology is incorporated to let HR professionals screen out unqualified candidates and reduce their workload. With the Candidate Alert technology and customizable searching criteria, the system will automatically search on the database for the newly registered job seekers and alert the users to ensure that they don’t miss out on any talents. The Human Resources department implemented this system in order to automate many of the tasks of the application process.</p>
 					<p>Developers :</p><CENTER>
 						<p style="font-size:12px;"><strong>Arth Da&ntilde;o &nbsp|&nbsp
 						John Loyd Camince &nbsp|&nbsp
@@ -106,9 +169,7 @@ background: none;
 						Raiven Kenn Lopez  &nbsp|&nbsp
                         Jomariette Kristine Suarez  &nbsp|&nbsp
                         Neco Caramonte &nbsp|&nbsp
-                    	Mark Arjel Cabais &nbsp|&nbsp
-                    	Marvin Aril &nbsp|&nbsp
-                    	Rafael Laurence Perez</strong></p></br></CENTER>
+                    	Mark Arjel Cabais</strong></p></br></CENTER>
                         <h6 class="text-muted" align="center">version 2.0</h6>
 					</div>
 						

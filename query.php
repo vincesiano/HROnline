@@ -419,4 +419,20 @@ if(isset($_POST['commentValue'])){
 		 echo $row['schedule'];
 	
 }
+if(isset($_POST['InitialInterview'])){
+	
+		$userID = $_GET['id'];
+		$date = date("Y-m-d h:i:sa");
+		$selectUser = "SELECT * FROM tbl_userlogs WHERE log_id = '$userID'";
+		$resultUser = $conn->query($selectUser);
+		while($rowUser=$resultUser->fetch_assoc()){
+			$user = $rowUser['username'];
+		}
+		
+			$sqlInsert = "INSERT INTO tbl_useractionlogs (username, updated_fieldname, updated_date, new_value) VALUES ('$user','Status', '$date', 'Initial Interview' ) ";
+			$resultUserAction = $conn->query($sqlInsert);
+}
+
+
+
 	?>
