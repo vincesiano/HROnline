@@ -30,7 +30,6 @@
       <title>Login Page</title>
       
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="shortcut icon" href="favicon.ico" />
       <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
       <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
       <link rel="stylesheet" type="text/css" href="css/ripples.css">

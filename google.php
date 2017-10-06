@@ -57,6 +57,7 @@
 
 
 
+
 	</head>
 
 <body style = 'background-color: white'>
@@ -169,7 +170,69 @@ background: none;
 
 	<?php  
 
-		include('sidenavhtml.php');
+	$id = $_GET['id'];
+		echo '
+	<style>
+		h5 {
+			color:black;
+
+		}
+		h5:hover {
+			color:white;
+			
+		}
+		.navi:hover{
+			background-color: #00008B;
+			color: white;
+		}
+	</style>
+	
+	<div id="mySidenav" class="sidenav" style="background: url(pic4.jpg);">
+	
+	<img src="adg1.png" class="img-responsive" width="60%" style="margin-bottom: 10%; margin-left: 4em;">
+	<img src="adg.png" class="img-responsive"  width="100%" style=" padding: 5px; margin-top: 5px; margin-bottom: 20%;">
+	<a href="javascript:void(0)" class="closebtn" style="color:black;" onclick="closeNav()">&times;</a> ';
+	
+	/*
+	if($_SESSION['neco'] == 1)
+		  echo'
+			<a href="google.php" style="background-color: #262626"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION['neco'] == 2){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left; background-color: #262626; href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION["neco"] == 3){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	*/
+	echo' 
+	
+	<a class="navi" href="google.php?id='.$id.'"><h5>Application List</h5></a>
+	<a class="navi" style="text-align: left;" href="reports.php?id='.$id.'"><h5>Reports</h5></a>
+	<a class="navi" style="text-align: left;" href="addNewPosition.php?id='.$id.'"><h5>Add Position</h5></a>
+	<a class="navi" style="text-align: left;" href="createAccount.php?id='.$id.'"><h5>Create User Accounts</h5></a>
+	<a class="navi" style="text-align: left;" href="user_logs.php?id='.$id.'"><h5>User History Logs</h5></a>';
+   if($_SESSION['id'] == 1){
+	  echo '
+	  <a class="navi" href="about.php?id='.$id.'" style="font-size: 1em; margin-bottom:1em;"> About Us</a>
+	 
+	  <a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+		
+	  </div>';
+   }else{
+	   //if($_SESSION['neco'] == 3){
+		   echo '<a class="navi" id = "accountAnchor" style="text-align: left;" href="account.php?id='.$id.'"><h5>Account</h5></a>
+		   <a class="navi" href="about.php"><h5> About Us </h5></a>
+				<a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+				 </div> ';
+	//}
+	
+}
 
 		if(!empty($_SESSION['queryerror'])){
 
@@ -391,9 +454,11 @@ background: none;
 
 						<li class="dropdown-header">Change stage to:</li>
 
-						<li id='InitialInterview' style = "position:absolute; visibility:hidden;" class= "openOveride"><button class=' btn btn-default' data-toggle='modal' onclick = 'setValValue("Initial Interview")'data-target ='#interviewModal' data-type='Initial Interview'><i class="fa fa-users"></i> Initial Interview</button></li>
+						<li id='InitialInterview' style = "position:absolute; visibility:hidden;" class= "openOveride"><button class=' btn btn-default' data-toggle='modal' data-target ='#interviewModal' data-type='Initial Interview'><i class="fa fa-users"></i> Initial Interview</button>
+							
+						</li>
 
-						<li id='SecondInterview'style = "position:absolute; visibility:hidden;" class= "openOveride"><button class=' btn btn-default' data-toggle='modal' onclick = 'setValValue("Second Interview")'data-target ='#interviewModal' data-type='Second Interview'><i class="fa fa-users"></i> Second Interview</button></li>
+						<li id='SecondInterview'style = "position:absolute; visibility:hidden;" class= "openOveride"><button class=' btn btn-default' data-toggle='modal' data-target ='#interviewModal' data-type='Second Interview'><i class="fa fa-users"></i> Second Interview</button></li>
 
 						<li id='ThirdInterview'style = "position:absolute; visibility:hidden;" class= "openOveride"><button class=' btn btn-default' data-toggle='modal' onclick = 'setValValue("Third Interview")'data-target ='#interviewModal' data-type='Third Interview'><i class="fa fa-users"></i> Third Interview</button></li>
 
@@ -412,9 +477,6 @@ background: none;
 						<li><button  class='actionbtn2 btn btn-default openOveride' data-type='Failed' style = "position:absolute; visibility:hidden;"><i class="fa fa-close"></i> Failed</button></li>
 
 						<li><button  class='actionbtn2 btn btn-default openOveride' data-type='Passed' style = "position:absolute; visibility:hidden;"><i class="fa fa-check"></i>Passed</button></li>
-
-
-
 						<li></li>
 
 						<li id = 'override'><button style="color:green" class=' btn btn-default'  >@<i class="fa fa-default"></i> Override</button></li>
@@ -604,14 +666,9 @@ background: none;
 								}
 
 							}
-
-								
-
 							$sql = $sql." ORDER BY `Timestamp` desc ";
 
 							unset($_SESSION['show']);
-
-								
 
 							$result = $conn->query($sql);
 
@@ -675,15 +732,15 @@ background: none;
 
 										$class2 = 'label label-default';
 
-									}else if($row['Stage'] == 'Passed'){
+									}elseif($row['Stage'] == 'Passed'){
 
 										$class2 = 'label label-info';
 
-									}else if($row['Stage'] == 'Failed'){
+									}elseif($row['Stage'] == 'Failed'){
 
 										$class2 = 'label label-danger';
 
-									}else if($row['Stage'] == 'Passed - Endorsed'){
+									}elseif($row['Stage'] == 'Passed - Endorsed'){
 
 										$class2 = 'label label-primary';
 
@@ -692,6 +749,7 @@ background: none;
 										$class2 = 'a';
 
 									}
+									
 
 									$diff =  date_diff(new DateTime(date("Y-m-d", strtotime($row['Timestamp']))),new DateTime(date('Y-m-d')));
 
@@ -743,7 +801,7 @@ background: none;
 
 												<div style = 'border-style: solid; border-color:#dab358; margin-bottom:10%; margin-top:10%;'>
 
-												<a  title='View Information' href='printable.php?id=".$row['ID']."' target='_blank' class='btn btn-primary btn-raised btn-sm'><i class='fa fa-eye'></i></a> 
+												<a  title='View Information' href='printableResume.php?id=".$row['ID']."&&ref=".$row['ReferenceCode']."' target='_blank' class='btn btn-primary btn-raised btn-sm'><i class='fa fa-eye'></i></a> 
 
 												<button title='Email' class='btn btn-raised btn-sm btn-primary clickme' data-toggle='modal' data-email='".$row['Email']."' data-name='".$row['Name']."' data-id='".$row['ID']."'><i class='fa fa-envelope'></i></button>
 
@@ -787,9 +845,6 @@ background: none;
 
 	</div>
 
-
-
-	
 
 	<!-- Google query -->
 
@@ -972,15 +1027,9 @@ background: none;
 
 						<div class="form-group floating-label" id="province_city" name="googleprovince_cityquery"></div>
 
-						
-
 						<!--MUNICIPALITY-->
 
 						<div class="form-group floating-label" id="municipality" name="googlemunicipalityquery"style="padding-top: 15px"> </div>
-
-
-
-						
 
 			        	<div class="form-group floating-label">
 
@@ -1366,7 +1415,7 @@ background: none;
 
 							<span style= "width:45%;" >Enter your email account:</span>
 
-							<button  class = "btn btn-raised btn-primary btn-sm" data-toggle = "modal" data-target ="#modalPass"  id="">confirm</button>
+							<button  class = "btn btn-raised btn-primary btn-sm" data-toggle = "modal" data-target ="#modalPass"  id="interviewConfirm">confirm</button>
 
 						</div>
 
@@ -1401,16 +1450,6 @@ background: none;
 	</div>	  </div>
 
 	</div>
-
-	
-
-
-
-	
-
-	
-
-		
 
 	<!--Accepted-->	
 
@@ -1922,11 +1961,13 @@ var waitingDialog = waitingDialog || (function ($) {
 
         });
 
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 
 
 		$(document).ready(function(){
+
 
 			$.material.init();
 
@@ -1939,6 +1980,25 @@ var waitingDialog = waitingDialog || (function ($) {
 			$('.showHideColumn').on('click', function(event){
 
 			event.stopPropagation();
+
+			});
+			$('#InitialInterview').on("click",function(event){
+
+				setValValue("Initial Interview");
+				<?php
+				date_default_timezone_set("Singapore");
+					$userID = $_GET['id'];
+					$date = date("Y-m-d h:i:sa");
+					$selectUser = "SELECT * FROM tbl_userlogs WHERE log_id = '$userID'";
+					$resultUser = $conn->query($selectUser);
+					while($rowUser=$resultUser->fetch_assoc()){
+						$user = $rowUser['username'];
+					}
+					
+						$sqlInsert = "INSERT INTO tbl_useractionlogs (username, updated_fieldname, updated_date, new_value) VALUES ('$user','Status', '$date', 'Initial Interview' ) ";
+						$resultUserAction = $conn->query($sqlInsert);
+					
+				?>						
 
 			});
 
@@ -1977,7 +2037,6 @@ var waitingDialog = waitingDialog || (function ($) {
 			}
 
 			
-
 			$('html').click(function(e){
 
 				if ( $(e.target).hasClass('dropbtn')){	
@@ -2022,6 +2081,7 @@ var waitingDialog = waitingDialog || (function ($) {
 
 			$('#statusDropdown').on('hidden.bs.dropdown', function () {
 
+
 					$('.openOveride').prop('style','position:absolute;visibility:hidden;');
 
 										if(checkSimilarity == true){
@@ -2032,7 +2092,7 @@ var waitingDialog = waitingDialog || (function ($) {
 
 					}else if(idStatus[0] == "Initial Interview"){
 
-						$("#SecondInterview").prop('style','position:static;visibility:visible;');	
+						$("#SecondInterview").prop('style','position:static;visibility:visible;');
 
 					}else if(idStatus[0] == "Second Interview"){
 
@@ -3239,7 +3299,7 @@ var waitingDialog = waitingDialog || (function ($) {
 
 			    	$('#interviewModal').modal('hide');
 
-						if(adminID == 1 ){
+						if(adminID == 0 ){
 
 							sendersEmail = '';
 

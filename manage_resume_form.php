@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	session_start();
 	
 	$_SESSION['newapp'] = 'new';
@@ -197,7 +197,6 @@
 		background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
 	    background: rgba(255, 255, 255, 0.5);
 	}
-	
 	input#fplace_birth.form-control{
 		background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
 	    background: rgba(255, 255, 255, 0.5);
@@ -251,8 +250,7 @@
       border-color: #285e8e; 
 	}*/
 	#btn_freshgrad,
-	#btn_experienced
-	#btn_intern{
+	#btn_experienced{
 		display: inline-block;
 		vertical-align: top;
 		width:48%;

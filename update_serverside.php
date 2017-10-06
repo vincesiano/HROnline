@@ -139,7 +139,7 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 			 $mother_name= $mother_name;
 		}
 
-	//work exp
+	
 	$one_datefrom = mysqli_real_escape_string($conn,$_POST['datefrom']);
 	$one_dateto = mysqli_real_escape_string($conn,$_POST['dateto']);
 	$ONE_DATES = $one_datefrom. " - " .$one_dateto;
@@ -168,22 +168,13 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 		else {
 			 	 $one_compadd = $one_compadd;
 		}
-	$ONE_EMPNAME = $one_company. ", ". $one_compadd;
+	$ONE_EMPNAME = $one_company. "$$". $one_contactnum. "%%". $one_compadd;
 			try { 
 				if (strlen($ONE_EMPNAME) < 8) {
 					 $ONE_EMPNAME = ""; 
 				} 
 				else { 
 					 $ONE_EMPNAME = $ONE_EMPNAME;} 
-				}
-			catch (Exception $e) { }
-	$ONE_EMPHONE = $one_contactnum;
-			try { 
-				if (empty($ONE_EMPHONE)) {
-					 $ONE_EMPHONE = " "; 
-				} 
-				else { 
-					 $ONE_EMPHONE = $ONE_EMPHONE;} 
 				}
 			catch (Exception $e) { }
 
@@ -256,7 +247,7 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 			if (!empty($_POST['compadd2'])) {
 				$two_compadd = mysqli_real_escape_string($conn,$_POST['compadd2']); 
 				} 
-	$TWO_EMPNAME = $two_company. ", ". $two_compadd;
+	$TWO_EMPNAME = $two_company. "$$". $two_contactnum. "%%". $two_compadd;
 			try {
 				 if (!empty($TWO_EMPNAME) && strlen($TWO_EMPNAME) <= 6) { 
 				 		$TWO_EMPNAME = ""; 
@@ -264,15 +255,6 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 				 else {
 				 		$TWO_EMPNAME = $TWO_EMPNAME;} 
 				 }
-			catch (Exception $e) { }
-	$TWO_EMPHONE = $two_contactnum;
-			try { 
-				if (empty($TWO_EMPHONE)) {
-					 $TWO_EMPHONE = " "; 
-				} 
-				else { 
-					 $TWO_EMPHONE = $TWO_EMPHONE;} 
-				}
 			catch (Exception $e) { }
 
 	$TWO_POSITION = "";
@@ -319,7 +301,7 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 				$three_compadd = mysqli_real_escape_string($conn,$_POST['compadd3']); 
 			}
 
-	$THREE_EMPNAME = $three_company.", ". $three_compadd;
+	$THREE_EMPNAME = $three_company."$$".$three_contactnum."%%".$three_compadd;
 			try {
 				 if (!empty($THREE_EMPNAME) && strlen($THREE_EMPNAME) <= 6) { 
 				 		$THREE_EMPNAME = ""; 
@@ -327,15 +309,6 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 				 else {
 				 		$THREE_EMPNAME = $THREE_EMPNAME;} 
 				 }
-			catch (Exception $e) { }
-	$THREE_EMPHONE = $three_contactnum;
-			try { 
-				if (empty($THREE_EMPHONE)) {
-					 $THREE_EMPHONE = " "; 
-				} 
-				else { 
-					 $THREE_EMPHONE = $THREE_EMPHONE;} 
-				}
 			catch (Exception $e) { }
 	
 	$THREE_POSITION = "";
@@ -385,7 +358,7 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 			if (!empty($_POST['compadd4'])) { 
 				$four_compadd = mysqli_real_escape_string($conn,$_POST['compadd4']); 
 			}
-	$FOUR_EMPNAME = $four_company. ", ". $four_compadd;
+	$FOUR_EMPNAME = $four_company. "$$". $four_contactnum. "%%". $four_compadd;
 			try {
 				 if (strlen($FOUR_EMPNAME) <= 6) { 
 				 		$FOUR_EMPNAME = " "; 
@@ -394,15 +367,7 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 				 		$FOUR_EMPNAME = $FOUR_EMPNAME;} 
 				 }
 			catch (Exception $e) { }
-	$FOUR_EMPHONE = $four_contactnum;
-			try { 
-				if (empty($FOUR_EMPHONE)) {
-					 $FOUR_EMPHONE = " "; 
-				} 
-				else { 
-					 $FOUR_EMPHONE = $FOUR_EMPHONE;} 
-				}
-			catch (Exception $e) { }		
+			
 
 	$FOUR_POSITION = ""; 
 			if (!empty($_POST['position4'])) {
@@ -451,22 +416,13 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 			if (!empty($_POST['compadd5'])) { 
 				$five_compadd = mysqli_real_escape_string($conn,$_POST['compadd5']); 
 			}
-	$FIVE_EMPNAME = $five_company. ", ". $five_compadd;
+	$FIVE_EMPNAME = $five_company. "$$". $five_contactnum. "%%". $five_compadd;
 			if (strlen($FIVE_EMPNAME) <= 6) { 
 				$FIVE_EMPNAME = ""; 
 			} 
 			else {
 				$FIVE_EMPNAME = $FIVE_EMPNAME;
 			}
-	$FIVE_EMPHONE = $five_contactnum;
-			try { 
-				if (empty($FIVE_EMPHONE)) {
-					 $FIVE_EMPHONE = " "; 
-				} 
-				else { 
-					 $FIVE_EMPHONE = $FIVE_EMPHONE;} 
-				}
-			catch (Exception $e) { }
 
 	$FIVE_POSITION = ""; 
 			if (!empty($_POST['position5'])) {
@@ -497,6 +453,23 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 			$question = $_POST['question'.$q_counter];
 			$questions = "INSERT INTO tbl_essay (`APPLICANT_ID`,`Answer`,`Question_ID`) VALUES ('$rf_id','$question','$q_counter')";
 			$result = $conn->query($questions);
+					
+		}
+
+//interview question
+
+
+		$CERTIFY=mysqli_real_escape_string($conn,$_POST['interviewButton']); 
+
+	
+	$sqlDelAns = "DELETE from tbl_answer where Applicant_ID = '$rf_id '";
+	$resultA = $conn->query($sqlDelAns);
+	$iq_count = 4;
+	$iq_counter = 1;
+		for($iq_counter; $iq_counter <= 7; $iq_counter++){
+			$questionI = $_POST['question'.$iq_counter];
+			$questionsI = "INSERT INTO tbl_essay (`Applicant_ID`,`Answer`,`interview_ID`) VALUES ('$rf_id','$interviewQ','$iq_counter')";
+			$result1 = $conn->query($questionsI);
 					
 		}
 //SPOUSE
@@ -546,7 +519,7 @@ $sql01 = "SELECT ID FROM `tbl_application` where REFERENCE_NO = '$ref_idS '";
 			}
 		$have_child = $_POST["siblingchild"];
 		$ap_stat = $_POST["app_stat"];
-		$sql = "UPDATE tbl_application SET `HAVE_CHILD`='$have_child', `APPLICATION_SOURCE`='$application_source', `SHIFTING_SCHEDULE`='$sched' , `WEEKENDS_HOLIDAYS` = '$holidays', `EMPLOYMENT_DATE` ='$empdate', `NAME`='$name',`LASTNAME`='$lname',`FIRSTNAME`='$fname',`MIDDLENAME`='$mname',`EXTENSIONNAME`='$ename' , `NICKNAME`='$nickname' , `GENDER` ='$sex', `CIVIL STATUS`='$cstatus' , `CITIZENSHIP`='$citizenship', `EMAIL ADDRESS`='$EMAIL' , `FATHER'S NAME` ='$father_name',`F_LNAME`='$flname',`F_FNAME`='$ffname', `F_MNAME`='$fmidname' , `MOTHER'S MAIDEN NAME`='$mother_name',`M_LNAME`='$mlname',`M_FNAME`='$mfname',`M_MNAME`='$mmname',`DATE OF BIRTH`='$bday123',`1. Inclusive Dates`='$ONE_DATES', `1.1 Employer's Name, Address and Phone`='$ONE_EMPNAME', `1.2 Position Title`='$ONE_POSITION', `1.3 Name_Position and Contact No. of Immediate Supervisor`='$ONE_SUPERVISOR', `1.4 Monthly Salary`='$ONE_SALARY', `1.5 Reason for Leaving`='$ONE_REASON', `1.6 Emp_phone`='$ONE_EMPHONE', `2. Inclusive Dates`='$TWO_DATES', `2.1 Employer's Name, Address and Phone`='$TWO_EMPNAME', `2.2 Position Title`='$TWO_POSITION', `2.3 Name_Position and Contact No. of Immediate Supervisor`='$TWO_SUPERVISOR', `2.4 Monthly Salary`='$TWO_SALARY', `2.5 Reason for Leaving`='$TWO_REASON',`2.6 Emp_phone`='$TWO_EMPHONE',`3. Inclusive Dates`='$THREE_DATES', `3.1 Employer's Name, Address and Phone`='$THREE_EMPNAME', `3.2 Position Title`='$THREE_POSITION', `3.3 Name_Position and Contact No. of Immediate Supervisor`='$THREE_SUPERVISOR', `3.4 Monthly Salary`='$THREE_SALARY', `3.5 Reason for Leaving`='$THREE_REASON',`3.6 Emp_phone`='$THREE_EMPHONE', `4. Inclusive Dates`='$FOUR_DATES', `4.1 Employer's Name, Address and Phone`='$FOUR_EMPNAME', `4.2 Position Title`='$FOUR_POSITION', `4.3 Name_Position and Contact No. of Immediate Supervisor`='$FOUR_SUPERVISOR', `4.4 Monthly Salary`='$FOUR_SALARY', `4.5 Reason for Leaving`='$FOUR_REASON',`4.6 Emp_phone`='$FOUR_EMPHONE',`5. Inclusive Dates`='$FIVE_DATES', `5.1 Employer's Name, Address and Phone`='$FIVE_EMPNAME', `5.2 Position Title`='$FIVE_POSITION', `5.3 Name_Position and Contact No. of Immediate Supervisor`='$FIVE_SUPERVISOR', `5.4 Monthly Salary`='$FIVE_SALARY', `5.5 Reason for Leaving`='$FIVE_REASON',`5.6 Emp_phone`='$FIVE_EMPHONE', `CERTIFY`='$CERTIFY',`SALARY`='$salary_expectation', `HEIGHT`='$height', `WEIGHT`='$WEIGHT', `BLOODTYPE`='$BLOODTYPE', `SKYPE_USERID`='$SKYPE_USERID', `CONTACT NAME`='$CONTACT_NAME', `CONTACT DETAILS`='$CONTACT_DETAILS', `MOBILE_NUMBER`='$mobile_num', `SPOUSE'S OCCUPATION`='$Spouse_occupation', `HOME_TELNUM`='$home_telnum',`APPLICANT_STATUS`='$ap_stat',`Status`='Pending' where `REFERENCE_NO` = '$ref_id'";
+		$sql = "UPDATE tbl_application SET `HAVE_CHILD`='$have_child', `APPLICATION_SOURCE`='$application_source', `SHIFTING_SCHEDULE`='$sched' , `WEEKENDS_HOLIDAYS` = '$holidays', `EMPLOYMENT_DATE` ='$empdate', `NAME`='$name',`LASTNAME`='$lname',`FIRSTNAME`='$fname',`MIDDLENAME`='$mname',`EXTENSIONNAME`='$ename' , `NICKNAME`='$nickname' , `GENDER` ='$sex', `CIVIL STATUS`='$cstatus' , `CITIZENSHIP`='$citizenship', `EMAIL ADDRESS`='$EMAIL' , `FATHER'S NAME` ='$father_name',`F_LNAME`='$flname',`F_FNAME`='$ffname', `F_MNAME`='$fmidname' , `MOTHER'S MAIDEN NAME`='$mother_name',`M_LNAME`='$mlname',`M_FNAME`='$mfname',`M_MNAME`='$mmname',`DATE OF BIRTH`='$bday123',`1. Inclusive Dates`='$ONE_DATES', `1.1 Employer's Name, Address and Phone`='$ONE_EMPNAME', `1.2 Position Title`='$ONE_POSITION', `1.3 Name_Position and Contact No. of Immediate Supervisor`='$ONE_SUPERVISOR', `1.4 Monthly Salary`='$ONE_SALARY', `1.5 Reason for Leaving`='$ONE_REASON', `2. Inclusive Dates`='$TWO_DATES', `2.1 Employer's Name, Address and Phone`='$TWO_EMPNAME', `2.2 Position Title`='$TWO_POSITION', `2.3 Name_Position and Contact No. of Immediate Supervisor`='$TWO_SUPERVISOR', `2.4 Monthly Salary`='$TWO_SALARY', `2.5 Reason for Leaving`='$TWO_REASON',`3. Inclusive Dates`='$THREE_DATES', `3.1 Employer's Name, Address and Phone`='$THREE_EMPNAME', `3.2 Position Title`='$THREE_POSITION', `3.3 Name_Position and Contact No. of Immediate Supervisor`='$THREE_SUPERVISOR', `3.4 Monthly Salary`='$THREE_SALARY', `3.5 Reason for Leaving`='$THREE_REASON', `4. Inclusive Dates`='$FOUR_DATES', `4.1 Employer's Name, Address and Phone`='$FOUR_EMPNAME', `4.2 Position Title`='$FOUR_POSITION', `4.3 Name_Position and Contact No. of Immediate Supervisor`='$FOUR_SUPERVISOR', `4.4 Monthly Salary`='$FOUR_SALARY', `4.5 Reason for Leaving`='$FOUR_REASON',`5. Inclusive Dates`='$FIVE_DATES', `5.1 Employer's Name, Address and Phone`='$FIVE_EMPNAME', `5.2 Position Title`='$FIVE_POSITION', `5.3 Name_Position and Contact No. of Immediate Supervisor`='$FIVE_SUPERVISOR', `5.4 Monthly Salary`='$FIVE_SALARY', `5.5 Reason for Leaving`='$FIVE_REASON', `CERTIFY`='$CERTIFY',`SALARY`='$salary_expectation', `HEIGHT`='$height', `WEIGHT`='$WEIGHT', `BLOODTYPE`='$BLOODTYPE', `SKYPE_USERID`='$SKYPE_USERID', `CONTACT NAME`='$CONTACT_NAME', `CONTACT DETAILS`='$CONTACT_DETAILS', `MOBILE_NUMBER`='$mobile_num', `SPOUSE'S OCCUPATION`='$Spouse_occupation', `HOME_TELNUM`='$home_telnum',`APPLICANT_STATUS`='$ap_stat',`Status`='Pending' where `REFERENCE_NO` = '$ref_id'";
 
 			 
 

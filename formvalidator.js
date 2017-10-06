@@ -83,22 +83,7 @@ $("#question1").on('keydown', function(e) {
 				$("#employers_address").blur();
 				$("#position-title").blur();
 				$("#reason").blur();
-			});
-				$("#btn_intern").click(function(){
-				$("button").removeClass("active");
-				$(this).addClass("active");
-				document.getElementById("app_stat").value = 'grad';
-				$('#employers_name1').attr('required', false);
-				$('#employers_address').attr('required', false);
-				$('#position-title').attr('required', false);
-				$('#reason').attr('required', false);
-				$('#monthlysalary').attr('required', false);
-				$("#employers_name1").blur();
-				$("#employers_address").blur();
-				$("#position-title").blur();
-				$("#reason").blur();
-			});
-
+    		});
 			$("#btn_experienced").click(function(){
 				
 				$("button").removeClass("active");
@@ -183,7 +168,11 @@ $( "#fnext" ).on( "click", function() {
 		}
 		 
 });
+$("#apply_position").on('change',function(e){
+	$('#position_data').attr('value',$(this).val());
+});
 $( "#snext" ).on( "click", function() {
+
 	document.getElementById("positionErrorMessage").style.display = 'none';
 		var emailvalue =  $('#email').val();
 		$.ajax({

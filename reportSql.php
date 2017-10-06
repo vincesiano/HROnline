@@ -1,168 +1,344 @@
 <?php
+
 	/*Total*/	
+
 			$mainQuery = "from(SELECT tbl_application.ID as 'ID',
+
 											`NAME` as `Name`,
+
 											`Timestamp` as 'Timestamp',
+
 											`Email Address` as 'Email',
+
 											`Contact No.` as 'Contact Number',
+
 											`status` as 'Status',
+
 											`Current Address` as 'Address',
+
 											concat(`3.2 Position Title`, ' ', `2.2 Position Title`,' ',`1.2 Position Title`,' ',`4.2 Position Title`) as 'Previous Jobs',
+
 											`Col_degree Course` as 'Course',
+
 											(select `position_name` from tbl_position where `id` = `Position`) as 'Job Title',
+
 											'source' as 'Source',
+
 											`Gender` as 'Gender',
+
 											`Age` as 'Age',
+
 											`Note` as 'note',
+
 											(CASE 
+
 											  WHEN `Schedule` ='0000-00-00 00:00:00' THEN ''
+
 											  ELSE SCHEDULE
+
 											END) as `schedule`,
+
 											Application_source as 'Application_source'
+
 									FROM tbl_application  )myTable";
+
 			
+
 			/*--START--*/
+
 				$sql = "SELECT COUNT(*) AS totalGoogle FROM tbl_application WHERE source='application'";
+
 				$result = $conn->query($sql);
+
 				while($row = $result->fetch_assoc()){
+
 					echo "<script>total.push(".$row['totalGoogle'].")</script>";
+
 				}
+
 				$sql = "SELECT COUNT(*) AS totalJobfair FROM tbl_application WHERE source='jobfair'";
+
 				$result = $conn->query($sql);
+
 				while($row = $result->fetch_assoc()){
+
 					echo "<script>total.push(".$row['totalJobfair'].")</script>";
+
 				}
+
 				$sql = "SELECT COUNT(*) AS totalIndeed FROM tbl_application WHERE source='indeed'";
+
 				$result = $conn->query($sql);
+
 				while($row = $result->fetch_assoc()){
+
 					echo "<script>total.push(".$row['totalIndeed'].")</script>";
+
 				}
+
 			/*--END--*/
+
 				
+
 			/*Gender*/
+
 				$gerndersql1 = "SELECT COUNT(*) AS gender, SUM(CASE WHEN UPPER(`Gender`) = 'MALE' THEN 1 ELSE 0 END) as 'maleGoogle', SUM(CASE WHEN `Gender` like '%FEMALE%' THEN 1 ELSE 0 END) as 'femaleGoogle'  ".$mainQuery."  where  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$startDate."' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$endDate."'";
+
 				$result = $conn->query($gerndersql1);
+
 				$row = $result->fetch_assoc();
+
 				echo "<script>genderG.push(".$row['maleGoogle'].")</script>";
+
 				echo "<script>genderG.push(".$row['femaleGoogle'].")</script>";
 
+
+
 			/*specificDate*/		
+
 				$gerndersql3 = "SELECT  count(*) as total  ".$mainQuery."  where DATE_FORMAT(`Timestamp`, '%Y-%m-%d') between '".$startDate."' and '".$endDate."'";
+
 				$result3 = $conn->query($gerndersql3);				
+
 				$row4 = $result3->fetch_assoc();
+
 				echo "<script>currentDate+=".$row4['total'].";</script>";
+
 		
+
 			/*activityLog*/		
+
 				$gerndersql2 = "SELECT 
+
 				sum(CASE WHEN `Status` = 'Pending' and DATEDIFF(now(),DATE_FORMAT(`Timestamp`, '%Y-%m-%d'))<90  THEN 1 ELSE 0 END) as 'active',
+
 				sum(CASE WHEN `Status` = 'Pending' and DATEDIFF(now(),DATE_FORMAT(`Timestamp`, '%Y-%m-%d'))>90 and DATEDIFF(now(),DATE_FORMAT(`Timestamp`, '%Y-%m-%d'))<60 THEN 1 ELSE 0 END) as 'inactive' ".$mainQuery;
+
 				$result2 = $conn->query($gerndersql2);				
+
 				$row3 = $result2->fetch_assoc();
+
 				echo "<script>activeLog+=".$row3['active'].";</script>";
+
 				echo "<script>inactiveLog+=".$row3['inactive'].";</script>";
+
 				
+
 			/*Age bracket*/
+
 				$agebracket1 = "SELECT SUM(CASE WHEN `Age` > 17 AND `Age` < 26 THEN 1 ELSE 0 END) as '1st',
+
 								SUM(CASE WHEN `Age` > 25 AND `Age` < 31 THEN 1 ELSE 0 END) as '2nd',
+
 								SUM(CASE WHEN `Age` > 30 AND `Age` < 36 THEN 1 ELSE 0 END) as '3rd',
+
 								SUM(CASE WHEN `Age` > 35 AND `Age` <= 42 THEN 1 ELSE 0 END) as '4th',
+
 								SUM(CASE WHEN `Age` > 42 AND `Age` <= 50 THEN 1 ELSE 0 END) as '5th',
+
 								SUM(CASE WHEN `Age` > 50 THEN 1 ELSE 0 END) as '6th'  ".$mainQuery."
+
 								where  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$startDate."' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$endDate	."'";
+
 				$result = $conn->query($agebracket1);
+
 				$row = $result->fetch_assoc();
+
 				echo "<script>ageGoogle.push(".$row['1st'].")</script>";
+
 				echo "<script>ageGoogle.push(".$row['2nd'].")</script>";
+
 				echo "<script>ageGoogle.push(".$row['3rd'].")</script>";
+
 				echo "<script>ageGoogle.push(".$row['4th'].")</script>";
+
 				echo "<script>ageGoogle.push(".$row['5th'].")</script>";
+
 				echo "<script>ageGoogle.push(".$row['6th'].")</script>";
 
+
+
 		
+
 				/*Application Status*/
+
 				$statussql = "SELECT 
+
 				SUM(CASE WHEN Status = 'Pending' AND DATEDIFF(now(),DATE_FORMAT(`Timestamp`, '%Y-%m-%d'))<60 then 1 else 0 end)  as 'Pending',
+
 				SUM(CASE WHEN Upper(`Status`) like '%INTERVIEW%' AND  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-01-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-12-31' THEN 1 ELSE 0 END) as 'interview',
+
 				SUM(CASE WHEN UPPER(`Status`) = 'NO SHOW' AND  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-01-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-12-31' THEN 1 ELSE 0 END) as 'scheduled'
+
 				".$mainQuery;
+
 				$statusresult = $conn->query($statussql);
+
 				while($row = $statusresult->fetch_assoc()){
+
 					echo "<script>statusNew += ".$row['Pending']."</script>";
+
 					echo "<script>statusSched += ".$row['scheduled']."</script>";
+
 					echo "<script>statusAccepted += ".$row['interview']."</script>";
-				}
-				/*--START--*/
-				$statussql2 = "SELECT Count(`Status`) as 'comment' ".$mainQuery." where UPPER(`Status`) in ('FAILED','REJECTED') ";
-				$statusresult2 = $conn->query($statussql2);
-				while($row = $statusresult2->fetch_assoc()){
-					echo "<script>statusComment += ".$row['comment']."</script>";
-				}
-				/*--END--*/
-				
-				/*Position*/
-				$a = array();
-				$topFive = "select distinct position, count(position) as 'total',(select position_name from tbl_position where id = tbl_application.position) as 'title' from tbl_application group by position order by `total` desc limit 15";
-				$topresult = $conn->query($topFive);
-				while($toprow = $topresult->fetch_assoc()){
-					array_push($a,$toprow['title']);
-					echo "<script>locationI.push('".$toprow['title']."');</script>";
-					$locationsqlG = "SELECT SUM(CASE WHEN `Job Title` = '".$toprow['title']."' THEN 1 ELSE 0 END) as '".$toprow['title']."' ".$mainQuery."  where  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-01-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-12-31'";
-					$locresult = $conn->query($locationsqlG);			
-						while($locrow = $locresult->fetch_assoc()){
-							echo "<script>locationG.push('".$locrow[''.$toprow['title']]."');</script>";
-						}			
-					
+
 				}
 
-			/*Monthly*/		
-				$monthsql = "SELECT SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-01-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') < '".$currentYear."-02-01' THEN 1 ELSE 0 END) as 'january', 
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-02-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') < '".$currentYear."-03-01' THEN 1 ELSE 0 END) as 'february', 
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-03-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-03-31'  THEN 1 ELSE 0 END) as 'march',
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-04-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-04-30' THEN 1 ELSE 0 END) as 'april', 
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-05-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-05-31' THEN 1 ELSE 0 END) as 'may',
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-06-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-06-30' THEN 1 ELSE 0 END) as 'june',
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-07-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-07-31' THEN 1 ELSE 0 END) as 'july',
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-08-01' AND  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-08-31' THEN 1 ELSE 0 END) as 'august', 
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-09-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-09-30' THEN 1 ELSE 0 END) as 'september',  
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-10-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-10-31' THEN 1 ELSE 0 END) as 'october',
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-11-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-11-30' THEN 1 ELSE 0 END) as 'november', 
-									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-12-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-12-31' THEN 1 ELSE 0 END) as 'december' ".$mainQuery;
-				
-				
-				if($monthresult = $conn->query($monthsql)){
-					while($row = $monthresult->fetch_assoc()){
-						echo "<script>monthly.push(".$row['january'].")</script>";
-						echo "<script>monthly.push(".$row['february'].")</script>";
-						echo "<script>monthly.push(".$row['march'].")</script>";
-						echo "<script>monthly.push(".$row['april'].")</script>";
-						echo "<script>monthly.push(".$row['may'].")</script>";
-						echo "<script>monthly.push(".$row['june'].")</script>";
-						echo "<script>monthly.push(".$row['july'].")</script>";
-						echo "<script>monthly.push(".$row['august'].")</script>";
-						echo "<script>monthly.push(".$row['september'].")</script>";
-						echo "<script>monthly.push(".$row['october'].")</script>";
-						echo "<script>monthly.push(".$row['november'].")</script>";
-						echo "<script>monthly.push(".$row['december'].")</script>";
-					}
+				/*--START--*/
+
+				$statussql2 = "SELECT Count(`Status`) as 'comment' ".$mainQuery." where UPPER(`Status`) in ('FAILED','REJECTED') ";
+
+				$statusresult2 = $conn->query($statussql2);
+
+				while($row = $statusresult2->fetch_assoc()){
+
+					echo "<script>statusComment += ".$row['comment']."</script>";
+
 				}
+
+				/*--END--*/
+
+				
+
+				/*Position*/
+
+				$a = array();
+
+				$topFive = "select distinct position, count(position) as 'total',(select position_name from tbl_position where id = tbl_application.position) as 'title' from tbl_application group by position order by `total` desc limit 15";
+
+				$topresult = $conn->query($topFive);
+
+				while($toprow = $topresult->fetch_assoc()){
+
+					array_push($a,$toprow['title']);
+
+					echo "<script>locationI.push('".$toprow['title']."');</script>";
+
+					$locationsqlG = "SELECT SUM(CASE WHEN `Job Title` = '".$toprow['title']."' THEN 1 ELSE 0 END) as '".$toprow['title']."' ".$mainQuery."  where  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-01-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-12-31'";
+
+					$locresult = $conn->query($locationsqlG);			
+
+						while($locrow = $locresult->fetch_assoc()){
+
+							echo "<script>locationG.push('".$locrow[''.$toprow['title']]."');</script>";
+
+						}			
+
+					
+
+				}
+
+
+
+			/*Monthly*/	
+			/*$slqStatus = "SELECT * FROM tbl_application";
+			$resultStatus = $conn->query($slqStatus);
+			while ($rowStatus = $resultStatus->fetch_assoc()){
+			*/
+
+				$monthsql = "SELECT SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-01-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') < '".$currentYear."-02-01' THEN 1 ELSE 0 END) as 'january', 
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-02-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') < '".$currentYear."-03-01' THEN 1 ELSE 0 END) as 'february', 
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-03-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-03-31'  THEN 1 ELSE 0 END) as 'march',
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-04-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-04-30' THEN 1 ELSE 0 END) as 'april', 
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-05-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-05-31' THEN 1 ELSE 0 END) as 'may',
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-06-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-06-30' THEN 1 ELSE 0 END) as 'june',
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-07-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-07-31' THEN 1 ELSE 0 END) as 'july',
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-08-01' AND  DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-08-31' THEN 1 ELSE 0 END) as 'august', 
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-09-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-09-30' THEN 1 ELSE 0 END) as 'september',  
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-10-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-10-31' THEN 1 ELSE 0 END) as 'october',
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-11-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-11-30' THEN 1 ELSE 0 END) as 'november', 
+
+									SUM(CASE WHEN DATE_FORMAT(`Timestamp`, '%Y-%m-%d') >= '".$currentYear."-12-01' AND DATE_FORMAT(`Timestamp`, '%Y-%m-%d') <= '".$currentYear."-12-31' THEN 1 ELSE 0 END) as 'december' ".$mainQuery;
+
+				
+
+		/*	if ($rowStatus['Status'] = 'Pending'){	*/
+				
+
+				if($monthresult = $conn->query($monthsql)){
+
+					while($row = $monthresult->fetch_assoc()){
+
+						echo "<script>monthly.push(".$row['january'].")</script>";
+
+						echo "<script>monthly.push(".$row['february'].")</script>";
+
+						echo "<script>monthly.push(".$row['march'].")</script>";
+
+						echo "<script>monthly.push(".$row['april'].")</script>";
+
+						echo "<script>monthly.push(".$row['may'].")</script>";
+
+						echo "<script>monthly.push(".$row['june'].")</script>";
+
+						echo "<script>monthly.push(".$row['july'].")</script>";
+
+						echo "<script>monthly.push(".$row['august'].")</script>";
+
+						echo "<script>monthly.push(".$row['september'].")</script>";
+
+						echo "<script>monthly.push(".$row['october'].")</script>";
+
+						echo "<script>monthly.push(".$row['november'].")</script>";
+
+						echo "<script>monthly.push(".$row['december'].")</script>";
+
+					}
+
+				}
+		/*	}
+		}*/
+			
+
+
 
 			/*Source*/
-				$sourceSql = "select sum(Case when Application_source ='Jobstreet' then 1 else 0 end) as 'Jobstreet',
+
+				$sourceSql = "select sum(Case when Application_source ='Job street' or Application_source = 'Jobstreet'then 1 else 0 end) as 'Job street',
+
 				sum(Case when Application_source ='Linked In' then 1 else 0 end) as 'Linked In',
+
 				sum(Case when Application_source ='Facebook' then 1 else 0 end) as 'Facebook',
-				sum(Case when Application_source ='Referral' then 1 else 0 end) as 'Referral',
+
+				sum(Case when Application_source ='From a Friend' then 1 else 0 end) as 'From a Friend',
+
 				sum(Case when Application_source ='Website' then 1 else 0 end) as 'Website',
+
 				sum(Case when Application_source ='Others' or Application_source ='' then 1 else 0 end) as 'Others' ".$mainQuery ;
+
 			
+
 				if($sourceResult = $conn->query($sourceSql)){
+
 					while($row = $sourceResult->fetch_assoc()){
-						echo "<script>allSource.push(".$row['Jobstreet'].")</script>";
+
+						echo "<script>allSource.push(".$row['Job street'].")</script>";
+
 						echo "<script>allSource.push(".$row['Linked In'].")</script>";
+
 						echo "<script>allSource.push(".$row['Facebook'].")</script>";
-						echo "<script>allSource.push(".$row['Referral'].")</script>";
+
+						echo "<script>allSource.push(".$row['From a Friend'].")</script>";
+
 						echo "<script>allSource.push(".$row['Website'].")</script>";
+
 						echo "<script>allSource.push(".$row['Others'].")</script>";
+
 					}
+
 				}
+
 ?>
+
+
 

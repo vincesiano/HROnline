@@ -8,7 +8,6 @@
 <head>
 	<title>Application List</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="shortcut icon" href="favicon.ico" />
 	<meta name="viewport" content="width=device-width, initial-scale=1; charset=ISO-8859-1">
 	<!--meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1;">
@@ -305,11 +304,9 @@ background: none;
 			        	<div class=" floating-label">
 			        		<div class="input-group">
 			        			<label for="from" class="control-label">Application Date</label>
-			        			<br><br>
-			        			<span class="fa fa-calendar" style= "width:10%"></span>
-				        		<input class="form-control date" data-provide="datepicker" name="googlequeryappdate1" placeholder="FROM:"  style= "width:45%" id="from" data-date-autoclose="true"  data-date-end-date="1d" data-date-format="yyyy-mm-dd" readonly>
-								<span class="fa fa-calendar" style= "width:10%"></span>
-				        		<input class="form-control date" data-provide="datepicker" name="googlequeryappdate2" placeholder="TO:"  style= "width:45%"id="from" data-date-autoclose="false"  data-date-end-date="1d" data-date-format="yyyy-mm-dd" readonly>
+				        		<input class="form-control date" data-provide="datepicker" name="googlequeryappdate1" style= "width:45%" id="from" data-date-autoclose="true"  data-date-end-date="-1d" data-date-format="yyyy-mm-dd" readonly>
+								<span class="fa fa-calendar" style= "width:10%">TO:</span>
+				        		<input class="form-control date" data-provide="datepicker" name="googlequeryappdate2" style= "width:45%"id="from" data-date-autoclose="true"  data-date-end-date="-1d" data-date-format="yyyy-mm-dd" readonly>
 							</div>
 
 						</div>
@@ -1477,8 +1474,8 @@ var waitingDialog = waitingDialog || (function ($) {
 			});
 		}
 		function openNav() {
-		    document.getElementById("mySidenav").style.width = "250px";
-		    document.getElementById("main").style.marginLeft = "250px";
+		    document.getElementById("mySidenav").style.width = "300px";
+		    document.getElementById("main").style.marginLeft = "300px";
 		}
 		function closeNav() {
 		    document.getElementById("mySidenav").style.width = "0";

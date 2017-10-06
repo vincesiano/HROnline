@@ -1155,6 +1155,8 @@
 					      	<div class="form-group label-floating">
 						        <label class="control-label" for="source">Application Source</label>
 						        <select id="source" name="source" class="select form-control" onchange="showsource(this)">
+						        	<option value="Twitter">Twitter</option>
+						        	<option value="My Opportunity">My Opportunity</option>
 						        	<option value="Linked In">Linked In</option>
 						        	<option value="Indeed">Indeed</option>
 						        	<option value="Facebook">Facebook</option>

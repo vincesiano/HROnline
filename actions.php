@@ -2,7 +2,7 @@
 	include('auth.php');
 	include('connect.php');
 
-	
+	$interview = $_POST['iNt3RvIs3w3r'];
 	if(isset($_POST['hire'])){
 		$sql2 = "UPDATE tbl_application SET `Schedule`='',`Note`='',   `Status` = 'Hired ".$_POST['department']."(".$_POST['position'].") ".$_POST['startDate']."'  , `Timestamp` = '".date('Y-m-d')."' , `Timestamp` = '".date('Y-m-d')."' WHERE id = '".$_POST['id']."' ";
 		$result2 = $conn->query($sql2);
@@ -32,13 +32,14 @@
 			if($type == 'Rejected'){
 				require 'PHPMailer/PHPMailerAutoload.php';
 				$mail = new PHPMailer;
-				$mail->Host = 'relay-hosting.secureserver.net';
+				$mail->isSMTP();
+				$mail->Host = 'smtp.gmail.com';
 				$mail->Port = 587;
 				$mail->SMTPSecure = 'tls';
 				$mail->SMTPAuth = true;
-				$mail->Username = "phrecruitment@andersongroup.uk.com";
-				$mail->Password = "Password123";
-				$mail->setFrom('phrecruitment@andersongroup.uk.com','Anderson Group PH');
+				$mail->Username = "glizzelann05@gmail.com";
+				$mail->Password = "roldan060195";
+				$mail->setFrom('glizzelann05@gmail.com','Anderson Group PH');
 				$mail->addReplyTo('no-reply@example.com');
 				$mail->addAddress($row['email']);
 				$mail->isHTML(true);                                 
@@ -106,17 +107,20 @@
 			$result = $conn->query($sql);
 			
 			if ($result) {
-						
+				$interviewStage = "select interviewStage from tbl_interview where `InterviewCode` = '$interview' ";
+				$result = $conn->query($interviewStage);
+				while ($row = $result->fetch_assoc()) {
 				//email for the interviewer
 				require 'PHPMailer/PHPMailerAutoload.php';
 				$mail = new PHPMailer;
-				$mail->Host = 'relay-hosting.secureserver.net';
+				$mail-> isSMTP();
+				$mail->Host = 'smtp.gmail.com';
 				$mail->Port = 587;
 				$mail->SMTPSecure = 'tls';
 				$mail->SMTPAuth = true;
-				$mail->Username = "phrecruitment@andersongroup.uk.com";
-				$mail->Password = "Password123";
-				$mail->setFrom('phrecruitment@andersongroup.uk.com','Anderson Group PH');
+				$mail->Username = "glizzelann05@gmail.com";
+				$mail->Password = "roldan060195";
+				$mail->setFrom('glizzelann05@gmail.com','Anderson Group PH');
 				$mail->addReplyTo('no-reply@example.com');
 				$mail->addAddress($interviewersAccount);
 				$mail->isHTML(true);                                 
@@ -125,31 +129,34 @@
 				$bodyContent .= '<br>';
 				$bodyContent .= '<p>Dear '.$fname.',</p>';
 				$bodyContent .= '<br>';
-				$bodyContent .= '<p>Please be advised that you have been assigned to an interview with an applicant</p>';
-				$bodyContent .= '<p>Date:Time:  <b>'.$row['name'].'</b> at '.$schedule.'</p>';
+				$bodyContent .= '<p>Please be advised that you have been assigned to an '.$row['interviewStage'].' interview with an applicant</p>';
+				$bodyContent .= '<p>Name:  <b>'.$row['name'].'</b> </p>';
+				$bodyContent .= '<p>Date:   '.$schedule.'</p>';
 				$bodyContent .= '<br>';
 				$bodyContent .= 'To manage your applicant, click the link: <br>
-				<a href="andersongroup.ph/application/update_resume_form.php?ref='.$row['reference_no'].'&&iNt3RvI3w3r='.$rand_str.'"> andersongroup.ph/application/update_resume_form.php?ref='.$row['reference_no'].'&&iNt3RvI3w3r='.$rand_str.'</a>';
+				<a href="https:localhost:7777/HR_Online/update_resume_form.php?ref='.$row['reference_no'].'&&iNt3RvI3w3r='.$rand_str.'"> https:localhost:7777/HR_Online/update_resume_form.php?ref='.$row['reference_no'].'&&iNt3RvI3w3r='.$rand_str.'</a>';
 				$bodyContent .= '<br>';
-				$bodyContent .= '<p>Thank you</p>';
+				$bodyContent .= '<p>Thank you and Goodluck</p>';
 				$bodyContent .= '<br>';
 				$bodyContent .= '<p>Anderson Group PH</p>';
 				$mail->Subject = 'Anderson Group Philippines | Anderson.Recruits';
 				$mail->Body    = $bodyContent;
 				$mail->AltBody = 'Anderson';
+			}
 
 				if (!$mail->send()) {
 					echo "Email not sent.";
 					echo "Mailer Error: " . $mail->ErrorInfo;
 				}else{
 					$mail = new PHPMailer;
-					$mail->Host = 'relay-hosting.secureserver.net';
+					$mail-> isSMTP();
+					$mail->Host = 'smtp.gmail.com';
 					$mail->Port = 587;
 					$mail->SMTPSecure = 'tls';
 					$mail->SMTPAuth = true;
-					$mail->Username = "phrecruitment@andersongroup.uk.com";
-					$mail->Password = "Password123";
-					$mail->setFrom('phrecruitment@andersongroup.uk.com','Anderson Group PH');
+					$mail->Username = "glizzelann05@gmail.com";
+					$mail->Password = "roldan060195";
+					$mail->setFrom('glizzelann05@gmail.com','Anderson Group PH');
 					$mail->addReplyTo('no-reply@example.com');
 					$mail->addAddress($row['email']);
 					$mail->isHTML(true);

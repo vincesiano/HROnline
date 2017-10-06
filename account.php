@@ -12,7 +12,6 @@ unset($_SESSION['neco']);
 	<title>Accounts Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="shortcut icon" href="favicon.ico" />
 	<!-- <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css"> -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
 	<link rel="stylesheet" type="text/css" href="css/dataTables.material.css">
@@ -36,27 +35,71 @@ unset($_SESSION['neco']);
 <body>
 
 <?php
-	echo '
 	
-	<div id="mySidenav" class="sidenav" style="background-color:#b4d8f7;">
-	<img src="logorecruit.png" class="img-responsive" width="50%" style="margin-bottom: 2%; margin-top:20%;margin-left: 4em;">
-	<img src="textrecruit.png" class="img-responsive"  width="100%" style="margin-bottom: 20%;">
-	<a href="javascript:void(0)" class="closebtn" style="color:black;" onclick="closeNav()">&times;</a>';
 
-	echo'
-	<a class="navi" href="google.php" style="font-size: 1em; margin-bottom:1em; color: black;">Application List</a>
-	<a class="navi" style="text-align: left; font-size: 1em; margin-bottom:1em; color: black;" href="reports.php">Reports</a>';
+	$id = $_GET['id'];
+		echo '
+	<style>
+		h5 {
+			color:black;
+
+		}
+		h5:hover {
+			color:white;
+			
+		}
+		.navi:hover{
+			background-color: #00008B;
+			color: white;
+		}
+	</style>
+	
+	<div id="mySidenav" class="sidenav" style="background: url(pic4.jpg);">
+	
+	<img src="adg1.png" class="img-responsive" width="60%" style="margin-bottom: 10%; margin-left: 4em;">
+	<img src="adg.png" class="img-responsive"  width="100%" style=" padding: 5px; margin-top: 5px; margin-bottom: 20%;">
+	<a href="javascript:void(0)" class="closebtn" style="color:black;" onclick="closeNav()">&times;</a> ';
+	
+	/*
+	if($_SESSION['neco'] == 1)
+		  echo'
+			<a href="google.php" style="background-color: #262626"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION['neco'] == 2){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left; background-color: #262626; href="reports.php"><h5>Reports</h5></a>';
+	}
+	else if($_SESSION["neco"] == 3){
+		echo'
+			<a href="google.php"><h5>Application List</h5></a>
+			<a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
+	}
+	*/
+	echo' 
+	
+	<a class="navi" href="google.php?id='.$id.'"><h5>Application List</h5></a>
+	<a class="navi" style="text-align: left;" href="reports.php?id='.$id.'"><h5>Reports</h5></a>
+	<a class="navi" style="text-align: left;" href="addNewPosition.php?id='.$id.'"><h5>Add Position</h5></a>
+	<a class="navi" style="text-align: left;" href="createAccount.php?id='.$id.'"><h5>Create User Accounts</h5></a>
+	<a class="navi" style="text-align: left;" href="user_logs.php?id='.$id.'"><h5>User History Logs</h5></a>';
    if($_SESSION['id'] == 1){
 	  echo '
-	  <a class="navi" href="about.php" style="font-size: 1em; margin-bottom:1em; color: black;"> About Us</a>
-	  <a class="navi" style="text-align: left; color: black; margin-bottom:1em; font-size: 1em" href="adminloginpage.php">Log out</a>
+	  <a class="navi" href="about.php?id='.$id.'" style="font-size: 1em; margin-bottom:1em;"> About Us</a>
+	 
+	  <a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+		
 	  </div>';
    }else{
-		   echo '<a class="navi" id = "accountAnchor" style="text-align: left; margin-bottom:1em;font-size: 1em; color: black;" href="account.php">Account</a>
-			<a class="navi" href="about.php" style="font-size: 1em; margin-bottom:1em; color: black;"> About Us</a>
-				<a class="navi" style="text-align: left; font-size: 1em; color: black;" href="adminloginpage.php">Log out</a>
-				</div>';
-	}
+	   //if($_SESSION['neco'] == 3){
+		   echo '<a class="navi" id = "accountAnchor" style="text-align: left;" href="account.php?id='.$id.'"><h5>Account</h5></a>
+		   <a class="navi" href="about.php"><h5> About Us </h5></a>
+				<a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
+				 </div> ';
+	//}
+	
+}
 
 
 	?>
@@ -284,9 +327,9 @@ unset($_SESSION['neco']);
 		function timerIncrement() {
 		    idleTime++;
 		    if (idleTime == 30) { // minutes
-		    	<?php  
+		    	/*<?php  
 		    		$_SESSION['loginerror'] = 'You were idle for too long!';
-		    	?>
+		    	?>*/
 		        window.location = 'adminloginpage.php';
 		    }
 		}
