@@ -40,6 +40,7 @@
 		while($row = $resLog->fetch_assoc()){
 			$logId = $row['log_id'];
 		}
+		
 		header("location:google.php?id=$logId");
 	}else{
 		session_save_path('tmp');
