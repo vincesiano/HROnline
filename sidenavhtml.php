@@ -1,5 +1,5 @@
 <?php
-	
+	$id = $_GET['id'];
 	echo '
 	<style>
 		h5 {
@@ -41,11 +41,11 @@
 	*/
 	echo' 
 	
-	<a class="navi" href="google.php"><h5>Application List</h5></a>
-	<a class="navi" style="text-align: left;" href="reports.php"><h5>Reports</h5></a>
-	<a class="navi" style="text-align: left;" href="addNewPosition.php"><h5>Add Position</h5></a>
-	<a class="navi" style="text-align: left;" href="createAccount.php"><h5>Create User Accounts</h5></a>
-	<a class="navi" style="text-align: left;" href="user_logs.php"><h5>User History Logs</h5></a>';
+	<a class="navi" href="google.php?id='.$id.'"><h5>Application List</h5></a>
+	<a class="navi" style="text-align: left;" href="reports.php?id='.$id.'"><h5>Reports</h5></a>
+	<a class="navi" style="text-align: left;" href="addNewPosition.php?id='.$id.'"><h5>Add Position</h5></a>
+	<a class="navi" style="text-align: left;" href="createAccount.php?id='.$id.'"><h5>Create User Accounts</h5></a>
+	<a class="navi" style="text-align: left;" href="user_logs.php?id='.$id.'"><h5>User History Logs</h5></a>';
    if($_SESSION['id'] == 1){
 	  echo '
 	  <a class="navi" href="about.php" style="font-size: 1em; margin-bottom:1em;"> About Us</a>

@@ -25,6 +25,8 @@ $_SESSION['previous-page'] = 'createAccount.php';
       <title>User History Logs</title>
       
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="css/ripples.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
    <link type="text/css" href="css/bootstrap-table.css" rel="stylesheet">
@@ -194,6 +196,109 @@ $_SESSION['previous-page'] = 'createAccount.php';
 .options li:nth-child(6) {
   z-index: 1;
 }
+.showhidden{
+  pointer-events: none;
+}
+.sb-search {
+
+  position: relative;
+
+  margin-top: 10px;
+
+  width: 0%;
+
+  min-width: 60px;
+
+  height: 60px;
+
+  float: right;
+
+  overflow: hidden;
+
+
+
+  -webkit-transition: width 0.3s;
+
+  -moz-transition: width 0.3s;
+
+  transition: width 0.3s;
+
+
+
+  -webkit-backface-visibility: hidden;
+
+}
+
+#myTable tr.selected {
+
+background-color: #83b4ef !important; //color when selected
+
+}
+
+
+
+  .active {
+
+    background-color: white;
+
+  }
+
+  ul {
+
+    list-style-type: none;
+
+  }
+
+    #bgImg {
+
+    
+
+      position: absolute;
+
+      top: 1%;
+
+      left: 8%;
+
+      right: 5%;
+
+      z-index: 0;
+
+      background-attachment: fixed;
+
+      background-position: center;
+
+
+
+ 
+
+  }
+
+  
+
+#ulPrint div a, #ulSave div a{
+
+  padding: 0;
+
+border: none;
+
+background: none;
+
+
+
+}
+
+  
+
+  #ulPrint div a span, #ulSave div span{
+
+  float: left;
+
+
+
+}
+
+
+
 
 </style>
       
@@ -201,102 +306,99 @@ $_SESSION['previous-page'] = 'createAccount.php';
    
    <body>
    <?php
-  
-
   $id = $_GET['id'];
-    echo '
-  <style>
-    h5 {
-      color:black;
-
-    }
-    h5:hover {
-      color:white;
-      
-    }
-    .navi:hover{
-      background-color: #00008B;
-      color: white;
-    }
-  </style>
-  
-  <div id="mySidenav" class="sidenav" style="background: url(pic4.jpg);">
-  
-  <img src="adg1.png" class="img-responsive" width="60%" style="margin-bottom: 10%; margin-left: 4em;">
-  <img src="adg.png" class="img-responsive"  width="100%" style=" padding: 5px; margin-top: 5px; margin-bottom: 20%;">
-  <a href="javascript:void(0)" class="closebtn" style="color:black;" onclick="closeNav()">&times;</a> ';
-  
-  /*
-  if($_SESSION['neco'] == 1)
-      echo'
-      <a href="google.php" style="background-color: #262626"><h5>Application List</h5></a>
-      <a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
-  }
-  else if($_SESSION['neco'] == 2){
-    echo'
-      <a href="google.php"><h5>Application List</h5></a>
-      <a style="text-align: left; background-color: #262626; href="reports.php"><h5>Reports</h5></a>';
-  }
-  else if($_SESSION["neco"] == 3){
-    echo'
-      <a href="google.php"><h5>Application List</h5></a>
-      <a style="text-align: left;" href="reports.php"><h5>Reports</h5></a>';
-  }
-  */
-  echo' 
-  
-  <a class="navi" href="google.php?id='.$id.'"><h5>Application List</h5></a>
-  <a class="navi" style="text-align: left;" href="reports.php?id='.$id.'"><h5>Reports</h5></a>
-  <a class="navi" style="text-align: left;" href="addNewPosition.php?id='.$id.'"><h5>Add Position</h5></a>
-  <a class="navi" style="text-align: left;" href="createAccount.php?id='.$id.'"><h5>Create User Accounts</h5></a>
-  <a class="navi" style="text-align: left;" href="user_logs.php?id='.$id.'"><h5>User History Logs</h5></a>';
-   if($_SESSION['id'] == 1){
-    echo '
-    <a class="navi" href="about.php?id='.$id.'" style="font-size: 1em; margin-bottom:1em;"> About Us</a>
-   
-    <a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
-    
-    </div>';
-   }else{
-     //if($_SESSION['neco'] == 3){
-       echo '<a class="navi" id = "accountAnchor" style="text-align: left;" href="account.php?id='.$id.'"><h5>Account</h5></a>
-       <a class="navi" href="about.php"><h5> About Us </h5></a>
-        <a class="navi" style="text-align: left;" href="adminloginpage.php"><h5>Log out</h5></a>
-         </div> ';
-  //}
-  
-}
+  include 'sidenavhtml.php';
 
   ?>
   <div id="main">
-  <nav style="width:103.25%;  margin-left:-2%; background-color:transparent">
-       <div class="container-fluid">
+  <nav style="width:103.25%; margin-top:-2%; margin-left:-2%; background-color:#F0F8FF;">
+
+        <div class="container-fluid">
+
         <ul class="nav navbar-nav">
-          <h5 style="cursor:pointer; color:#00008B; font-family:'Trebuchet MS', Helvetica, sans-serif; padding-top:10px; padding-right:10px; padding-left:10px" onclick="openNav()"><i class="fa fa-bars"></i> Menu</h5>
+
+          <li data-toggle="dropdown-toggle"><a data-toggle='modal'><h4 style="cursor:pointer; color:#00008B; font-family:'Trebuchet MS', Helvetica, sans-serif; padding-top:5px; padding-right:10px; padding-left: -10px" onclick="openNav()"><i class="fa fa-bars"></i> Menu</h4></a></li>
+
+          
+
+          <li id = "useractionlogin" class="dropdown "><a data-toggle="user_actionlogs" href="#" onclick="tableFuntion()"><h4 style ="color:gray; font-family:'Trebuchet MS', Helvetica, sans-serif; padding-top:5px;">User Actions History</h4></span></a>  
+
+          </li>
+
+          <li id = 'userlogin' class="dropdown" ><a data-toggle="user_logins" href="#" ><h4 style ="color:gray; font-family:'Trebuchet MS', Helvetica, sans-serif; padding-top:5px;">User Login History</h4> </span></a>
+          </li>
+          <!--END-->
+
         </ul>
-            </div>
+
+        </div>
+
+      </nav>
+      <div class="row">
+        <div class="col-md-12">
 
 
    <hr style="padding-bottom: 1%">
   
         <div class="row">
           <div class="col-md-12">
-           
-            <table class="table table-striped">                     
-    <div class="table responsive">
+<!-- TABLES FOR EVERY USER LOGIN -->
+           <div id = "user_logins" class="table responsive"> 
+            <table  class="table table-striped">                     
+   
+                <thead>
+                    <tr>
+                     
+                      <th>Username</th>
+                      <th>Logged in Date</th>
+                      <th>User Role</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  include('connect.php');
+                  $sqltran = "SELECT * FROM tbl_userlogs";
+                  $result = $conn->query($sqltran);
+                  if ($result->num_rows > 0) {
+                      // output data of each row
+                      while($row = $result->fetch_assoc()) {
+
+
+                          echo '<tr>
+                                    <td scope="row">' . $row["username"]. '</td>
+                                    <td>' . $row["loggedInDate"] .'</td>
+                                    <td> '.$row["role"] .'</td>
+                                  </tr>';
+                      }
+                  } else {
+                      echo "0 results";
+                  } 
+                  ?>
+                 </tbody>
+             
+        </table>
+      </div>
+
+<!-- TABLE FOR ACTIONS DONE IN THE ADMIN SIDE -->      
+<div id = "user_actionlogs" class="table responsive">
+<table  class="table table-striped">                     
+    
         <thead>
             <tr>
              
               <th>Username</th>
-              <th>Logged in Date</th>
-              <th>User Role</th>
+              <th>Actions</th>
+              <th>Updated Fieldname</th>
+              <th>Updated Date</th>
+              <th>New Value</th>
               
             </tr>
         </thead>
         <tbody>
 <?php 
 include('connect.php');
-$sqltran = "SELECT * FROM tbl_userlogs";
+$sqltran = "SELECT * FROM tbl_useractionlogs";
 $result = $conn->query($sqltran);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -305,8 +407,10 @@ if ($result->num_rows > 0) {
 
         echo '<tr>
                   <td scope="row">' . $row["username"]. '</td>
-                  <td>' . $row["loggedInDate"] .'</td>
-                  <td> '.$row["role"] .'</td>
+                  <td>' . $row["action"] .'</td>
+                  <td>' . $row["updated_fieldname"] .'</td>
+                  <td> '.$row["updated_date"] .'</td>
+                   <td> '.$row["new_value"] .'</td>
                 </tr>';
     }
 } else {
@@ -314,8 +418,9 @@ if ($result->num_rows > 0) {
 } 
 ?>
        </tbody>
-    </div>
+    
 </table>
+</div>
           </div>
         </div>
      
@@ -325,19 +430,17 @@ if ($result->num_rows > 0) {
   <script type="text/javascript" src="js/bootstrap.js"></script>  
   <script type="text/javascript" src="js/material.js"></script>
   <script type="text/javascript" src="js/jquery.dropdown.js"></script>
-  <script type="text/javascript" src="js/dataTables.material.js"></script>  
-  <!-- <script type="text/javascript" src="js/dataTables.bootstrap.js"></script> -->
+  <script type="text/javascript" src="js/dataTables.material.js"></script> 
   <script type="text/javascript" src="js/bootstrap-clockpicker.js"></script>
   <script type="text/javascript" src="js/tether.js"></script>
   <script type="text/javascript">
     var idleTime = 0;
     
-
-     
     function anotherfunction(){
       $('#sureroll').modal('show');
       $('#myModal').modal('hide');
     }
+     
     function openNav() {
         document.getElementById("mySidenav").style.width = "300px";
         document.getElementById("main").style.marginLeft = "300px";
@@ -347,6 +450,7 @@ if ($result->num_rows > 0) {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
     }
+    
 </script>
 
  <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
@@ -358,7 +462,17 @@ if ($result->num_rows > 0) {
     $.material.init();
     $(document).ready(function() {
      //$('select').material_select();
+     $('#user_actionlogs').hide();
+     $('#user_logins').show();
     });
+    $("#userlogin").click(function(){
+        $('#user_actionlogs').hide();
+        $('#user_logins').show();
+});
+     $("#useractionlogin").click(function(){
+        $('#user_actionlogs').show();
+        $('#user_logins').hide();
+});
      $(function () {
 
   var defaultselectbox = $('#cusSelectbox');
@@ -466,5 +580,7 @@ function focusItems() {
     }
   
   </style> -->
+</div>
+</div>
 </body>
 </html>
